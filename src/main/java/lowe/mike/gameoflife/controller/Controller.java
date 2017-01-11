@@ -1,20 +1,25 @@
 package lowe.mike.gameoflife.controller;
 
+import static javafx.scene.input.MouseEvent.MOUSE_CLICKED;
+import static javafx.scene.layout.GridPane.setFillHeight;
+import static javafx.scene.layout.GridPane.setFillWidth;
 import static lowe.mike.gameoflife.model.Speed.FAST;
 import static lowe.mike.gameoflife.model.Speed.FASTEST;
 import static lowe.mike.gameoflife.model.Speed.MEDIUM;
 import static lowe.mike.gameoflife.model.Speed.SLOW;
 
+import javafx.beans.property.BooleanProperty;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import lowe.mike.gameoflife.model.Cell;
 import lowe.mike.gameoflife.model.GameOfLife;
+import lowe.mike.gameoflife.model.Grid;
 
 /**
  * Controller for <i>The Game of Life</i> application.
@@ -22,6 +27,10 @@ import lowe.mike.gameoflife.model.GameOfLife;
  * @author Mike Lowe
  */
 public final class Controller {
+
+	private static final double CELL_SIZE = 14;
+	private static final String CELL_PANE_STYLE_CLASS = "cellPane";
+	private static final String ALIVE_STYLE_CLASS = "alive";
 
 	@FXML
 	private AnchorPane rootPane;
@@ -39,7 +48,6 @@ public final class Controller {
 	private ToggleButton fastestToggleButton;
 	@FXML
 	private Label generationNumberLabel;
-
 	@FXML
 	private GridPane gridPane;
 
@@ -66,39 +74,54 @@ public final class Controller {
 	public void setGameOfLife(GameOfLife gameOfLife) {
 		this.gameOfLife = gameOfLife;
 		setGenerationNumberLabelTextProperty();
-
-		for (int rowIndex = 0; rowIndex < gameOfLife.getGrid().getNumberOfRows(); rowIndex++) {
-			for (int columnIndex = 0; columnIndex < gameOfLife.getGrid().getNumberOfColumns(); columnIndex++) {
-				
-				
-				Pane rectangle = new Pane();
-						rectangle.setPrefSize(14, 14);
-						GridPane.setFillHeight(rectangle, true);
-						GridPane.setFillWidth(rectangle, true);
-				rectangle.getStyleClass().add("cell");
-
-				gameOfLife.getGrid().getCell(rowIndex, columnIndex).aliveProperty()
-						.addListener((observable, oldValue, newValue) -> {
-							if (newValue)
-								rectangle.getStyleClass().add("alive");
-							else
-								rectangle.getStyleClass().remove("alive");
-						});
-
-				Cell cell = gameOfLife.getGrid().getCell(rowIndex, columnIndex);
-
-				rectangle.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-					cell.toggleAlive();
-				});
-				
-
-				gridPane.add(rectangle, columnIndex, rowIndex);
-			}
-		}
+		initializeGridPane();
 	}
 
 	private void setGenerationNumberLabelTextProperty() {
 		generationNumberLabel.textProperty().bind(gameOfLife.generationProperty().asString());
+	}
+
+	private void initializeGridPane() {
+		Grid grid = gameOfLife.getGrid();
+		int numberOfRows = grid.getNumberOfRows();
+		int numberOfColumns = grid.getNumberOfColumns();
+
+		for (int rowIndex = 0; rowIndex < numberOfRows; rowIndex++)
+			for (int columnIndex = 0; columnIndex < numberOfColumns; columnIndex++)
+				addCellPane(rowIndex, columnIndex);
+	}
+
+	private void addCellPane(int rowIndex, int columnIndex) {
+		Pane cellPane = new Pane();
+
+		addCellPaneStyle(cellPane);
+		addAlivePropertyListener(rowIndex, columnIndex, cellPane);
+		addClickEventHandler(rowIndex, columnIndex, cellPane);
+
+		gridPane.add(cellPane, columnIndex, rowIndex);
+	}
+
+	private void addCellPaneStyle(Pane cellPane) {
+		cellPane.setPrefSize(CELL_SIZE, CELL_SIZE);
+		setFillHeight(cellPane, true);
+		setFillWidth(cellPane, true);
+		cellPane.getStyleClass().add(CELL_PANE_STYLE_CLASS);
+	}
+
+	private void addAlivePropertyListener(int rowIndex, int columnIndex, Pane cellPane) {
+		BooleanProperty aliveProperty = gameOfLife.getGrid().getCell(rowIndex, columnIndex).aliveProperty();
+		aliveProperty.addListener((observable, oldValue, newValue) -> {
+			ObservableList<String> styleClass = cellPane.getStyleClass();
+			if (newValue)
+				styleClass.add(ALIVE_STYLE_CLASS);
+			else
+				styleClass.remove(ALIVE_STYLE_CLASS);
+		});
+	}
+
+	private void addClickEventHandler(int rowIndex, int columnIndex, Pane cellPane) {
+		Cell cell = gameOfLife.getGrid().getCell(rowIndex, columnIndex);
+		cellPane.addEventHandler(MOUSE_CLICKED, event -> cell.toggleAlive());
 	}
 
 	@FXML

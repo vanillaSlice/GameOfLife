@@ -33,7 +33,7 @@
 	-fx-text-fill: #ffffff;
 }
 
-.cell {
+.cellPane {
 	-fx-background-color: derive(#1d1d1d, 20.0%);
 }
 
