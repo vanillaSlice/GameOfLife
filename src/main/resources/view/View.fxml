@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane fx:id="rootPane" maxHeight="1.7976931348623157E308"
+	maxWidth="1.7976931348623157E308" styleClass="background" stylesheets="@Style.css"
+	xmlns="http://javafx.com/javafx/8.0.65" xmlns:fx="http://javafx.com/fxml/1"
+	fx:controller="lowe.mike.gameoflife.controller.Controller">
+	<padding>
+		<Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+	</padding>
+	<children>
+		<HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
+			prefHeight="24.0" prefWidth="900.0" spacing="10.0"
+			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+			AnchorPane.topAnchor="0.0">
+			<children>
+				<Separator maxHeight="-Infinity" maxWidth="-Infinity"
+					orientation="VERTICAL" prefHeight="24.0" prefWidth="6.0" />
+				<ToggleButton fx:id="playToggleButton" maxHeight="-Infinity"
+					maxWidth="-Infinity" mnemonicParsing="false" onAction="#playToggleButtonAction"
+					prefHeight="24.0" prefWidth="62.0" styleClass="button" text="Play" />
+				<ToggleButton fx:id="pauseToggleButton" maxHeight="-Infinity"
+					maxWidth="-Infinity" mnemonicParsing="false" onAction="#pauseToggleButtonAction"
+					prefHeight="24.0" prefWidth="71.0" styleClass="button" text="Pause" />
+				<Button maxHeight="-Infinity" maxWidth="-Infinity"
+					mnemonicParsing="false" onAction="#clearButtonAction" prefHeight="24.0"
+					prefWidth="70.0" text="Clear" />
+				<Separator maxHeight="-Infinity" maxWidth="-Infinity"
+					orientation="VERTICAL" prefHeight="24.0" prefWidth="6.0" />
+				<HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity"
+					prefHeight="24.0" prefWidth="381.0" spacing="10.0">
+					<children>
+						<Label maxHeight="-Infinity" maxWidth="-Infinity"
+							prefHeight="14.0" prefWidth="52.0" text="Speed" />
+						<ToggleButton fx:id="slowToggleButton" maxHeight="-Infinity"
+							maxWidth="-Infinity" mnemonicParsing="false" onAction="#slowToggleButtonAction"
+							prefHeight="24.0" prefWidth="62.0" styleClass="button" text="Slow" />
+						<ToggleButton fx:id="mediumToggleButton" maxHeight="-Infinity"
+							maxWidth="-Infinity" mnemonicParsing="false" onAction="#mediumToggleButtonAction"
+							prefHeight="24.0" prefWidth="80.0" styleClass="button" text="Medium" />
+						<ToggleButton fx:id="fastToggleButton" maxHeight="-Infinity"
+							maxWidth="-Infinity" mnemonicParsing="false" onAction="#fastToggleButtonAction"
+							prefHeight="24.0" prefWidth="59.0" styleClass="button" text="Fast" />
+						<ToggleButton fx:id="fastestToggleButton" maxHeight="-Infinity"
+							maxWidth="-Infinity" mnemonicParsing="false" onAction="#fastestToggleButtonAction"
+							prefHeight="24.0" prefWidth="88.0" styleClass="button" text="Fastest" />
+					</children>
+				</HBox>
+				<Separator maxHeight="-Infinity" maxWidth="-Infinity"
+					orientation="VERTICAL" prefHeight="24.0" prefWidth="6.0" />
+				<Label maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="24.0"
+					prefWidth="103.0" text="Generation" />
+				<Label fx:id="generationNumberLabel" alignment="CENTER_RIGHT"
+					contentDisplay="TEXT_ONLY" maxHeight="-Infinity" maxWidth="-Infinity"
+					prefHeight="24.0" prefWidth="99.0" />
+				<Separator maxHeight="-Infinity" maxWidth="-Infinity"
+					orientation="VERTICAL" prefHeight="24.0" prefWidth="6.0" />
+			</children>
+		</HBox>
+		<GridPane fx:id="gridPane" alignment="CENTER" hgap="1.0"
+			maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="600.0"
+			prefWidth="900.0" vgap="1.0" AnchorPane.bottomAnchor="0.0"
+			AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+			AnchorPane.topAnchor="35.0" />
+	</children>
+</AnchorPane>
