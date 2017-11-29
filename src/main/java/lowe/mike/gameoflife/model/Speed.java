@@ -3,21 +3,21 @@ package lowe.mike.gameoflife.model;
 /**
  * The {@code Speed} enum is used to dictate the speed of <i>The Game of
  * Life</i>.
- * 
+ *
  * @author Mike Lowe
  */
 public enum Speed {
 
-	SLOW(800), MEDIUM(200), FAST(80), FASTEST(10);
+    SLOW(800), MEDIUM(200), FAST(80), FASTEST(10);
 
-	private final double milliseconds;
+    private final double milliseconds;
 
-	private Speed(double milliseconds) {
-		this.milliseconds = milliseconds;
-	}
+    Speed(double milliseconds) {
+        this.milliseconds = milliseconds;
+    }
 
-	double getMilliseconds() {
-		return milliseconds;
-	}
+    double getMilliseconds() {
+        return milliseconds;
+    }
 
 }
