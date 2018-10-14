@@ -10,34 +10,34 @@ import static org.junit.Assert.assertEquals;
  */
 public final class GameOfLifeTests {
 
-    private GameOfLife gameOfLife;
+  private GameOfLife gameOfLife;
 
-    @Before
-    public void setup() {
-        gameOfLife = new GameOfLife(3, 3);
-    }
+  @Before
+  public void setup() {
+    gameOfLife = new GameOfLife(3, 3);
+  }
 
-    @Test
-    public void test_next() {
-        // execution and verification
-        gameOfLife.next();
-        assertEquals(1, gameOfLife.getGeneration());
-        gameOfLife.next();
-        assertEquals(2, gameOfLife.getGeneration());
-        gameOfLife.next();
-        assertEquals(3, gameOfLife.getGeneration());
-    }
+  @Test
+  public void test_next() {
+    // execution and verification
+    gameOfLife.next();
+    assertEquals(1, gameOfLife.getGeneration());
+    gameOfLife.next();
+    assertEquals(2, gameOfLife.getGeneration());
+    gameOfLife.next();
+    assertEquals(3, gameOfLife.getGeneration());
+  }
 
-    @Test
-    public void test_clear() {
-        // setup
-        gameOfLife.play();
+  @Test
+  public void test_clear() {
+    // setup
+    gameOfLife.play();
 
-        // execution
-        gameOfLife.clear();
+    // execution
+    gameOfLife.clear();
 
-        // verification
-        assertEquals(0, gameOfLife.getGeneration());
-    }
+    // verification
+    assertEquals(0, gameOfLife.getGeneration());
+  }
 
 }
