@@ -15,26 +15,26 @@ import static javafx.scene.input.MouseEvent.MOUSE_RELEASED;
  */
 final class PersistentToggleGroup extends ToggleGroup {
 
-    /**
-     * Creates a new {@code PersistentToggleGroup}.
-     */
-    PersistentToggleGroup() {
-        super();
-        addTogglesListener();
-    }
+  /**
+   * Creates a new {@code PersistentToggleGroup}.
+   */
+  PersistentToggleGroup() {
+    addTogglesListener();
+  }
 
-    private void addTogglesListener() {
-        getToggles().addListener((Change<? extends Toggle> change) -> {
-            while (change.next()) {
-                for (Toggle toggle : change.getAddedSubList()) {
-                    ToggleButton toggleButton = (ToggleButton) toggle;
-                    toggleButton.addEventFilter(MOUSE_RELEASED, mouseEvent -> {
-                        if (toggleButton.equals(getSelectedToggle()))
-                            mouseEvent.consume();
-                    });
-                }
+  private void addTogglesListener() {
+    getToggles().addListener((Change<? extends Toggle> change) -> {
+      while (change.next()) {
+        for (Toggle toggle : change.getAddedSubList()) {
+          ToggleButton toggleButton = (ToggleButton) toggle;
+          toggleButton.addEventFilter(MOUSE_RELEASED, mouseEvent -> {
+            if (toggleButton.equals(getSelectedToggle())) {
+              mouseEvent.consume();
             }
-        });
-    }
+          });
+        }
+      }
+    });
+  }
 
 }
