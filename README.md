@@ -1,8 +1,11 @@
 # Game of Life
+[![Build Status](https://travis-ci.org/vanillaSlice/GameOfLife.svg?branch=master)](https://travis-ci.org/vanillaSlice/GameOfLife)
+
 Game of Life is a cellular automaton devised by mathematician John Conway.
 
 In the game there exists a grid of cells, each of which can be in one of two states, *alive* or *dead*.
-Every cell has eight neighbours which it interacts with (the adjacent cells). After each step in the game, the following rules apply:
+Every cell has eight neighbours which it interacts with (the adjacent cells). After each step in the game, the following
+rules apply:
 
 1. Any live cell with fewer than two live neighbours dies, i.e. under population
 2. Any live cell with two or three live neighbours lives on to the next generation
@@ -32,22 +35,24 @@ To build the project:
 3. If you have Gradle installed locally, run the Gradle Daemon:
 
     ```
-    gradle clean fatjar
+    gradle clean build
     ```
+
    If you don't have Gradle installed locally and are running on a Unix-like platform such as Linux or Mac OS X, run:
 
     ```
-    ./gradlew clean fatjar
+    ./gradlew clean build
     ```
+
    If you don't have Gradle installed locally and are running on Windows, run:
 
     ```
-    gradlew clean fatjar
+    gradlew clean build
     ```
 
 ### Running
-Once built, to run the application go to build/libs and double-click GameOfLife-all-[version].jar or from your terminal/command prompt
-run:
+Once built, to run the application go to `build/libs` and double-click GameOfLife-all-[version].jar or from your
+terminal/command prompt run:
 ```
 java -jar GameOfLife-all-[version].jar
 ```
@@ -70,4 +75,4 @@ Resources useful for the completion of this project:
 
 ## License
 
-This project is licensed under the Apache License Version 2.0 - see the [LICENSE](LICENSE) file for details
+This project is licensed under the Apache License Version 2.0 - see the [LICENSE](LICENSE) file for details.
