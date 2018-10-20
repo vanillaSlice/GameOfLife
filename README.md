@@ -15,12 +15,12 @@ rules apply:
 
 An example of cell interaction:
 
-![pattern](/screenshots/pattern.gif)
+![pattern](/images/pattern-1.gif)
 
 See [Wikipedia](https://en.wikipedia.org/wiki/Conway's_Game_of_Life) for more information on The Game of Life.
 
 ## Screenshot
-![screenshot](/screenshots/screenshot.png)
+![screenshot](/images/screenshot-1.png)
 
 ## Getting Started
 
