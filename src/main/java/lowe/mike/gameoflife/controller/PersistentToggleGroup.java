@@ -1,15 +1,15 @@
 package lowe.mike.gameoflife.controller;
 
+import static javafx.scene.input.MouseEvent.MOUSE_RELEASED;
+
 import javafx.collections.ListChangeListener.Change;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
 
-import static javafx.scene.input.MouseEvent.MOUSE_RELEASED;
-
 /**
- * An extension of {@link ToggleGroup} that ensures that a {@link Toggle} in a
- * group must always be selected.
+ * An extension of {@link ToggleGroup} that ensures that a {@link Toggle} in a group must always be
+ * selected.
  *
  * @author Mike Lowe
  */

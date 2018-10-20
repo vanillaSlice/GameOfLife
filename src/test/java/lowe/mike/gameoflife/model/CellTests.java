@@ -1,11 +1,13 @@
 package lowe.mike.gameoflife.model;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-
 /**
+ * Cell tests.
+ *
  * @author Mike Lowe
  */
 public final class CellTests {
@@ -14,8 +16,11 @@ public final class CellTests {
   private Cell cell;
   private Cell[] neighbours;
 
+  /**
+   * Test setup.
+   */
   @Before
-  public void setup() {
+  public void setUp() {
     cell = new Cell();
     neighbours = new Cell[NUMBER_OF_NEIGHBOURS];
     for (int i = 0; i < NUMBER_OF_NEIGHBOURS; i++) {
@@ -29,7 +34,8 @@ public final class CellTests {
     test_calculateNextState(true, 1, false);
   }
 
-  private void test_calculateNextState(boolean isAlive, int numberOfAliveNeighbours, boolean expectedAlive) {
+  private void test_calculateNextState(boolean isAlive, int numberOfAliveNeighbours,
+      boolean expectedAlive) {
     // setup
     cell.setAlive(isAlive);
     setNumberOfAliveNeighbours(numberOfAliveNeighbours);

@@ -1,5 +1,13 @@
 package lowe.mike.gameoflife.controller;
 
+import static javafx.scene.input.MouseEvent.MOUSE_CLICKED;
+import static javafx.scene.layout.GridPane.setFillHeight;
+import static javafx.scene.layout.GridPane.setFillWidth;
+import static lowe.mike.gameoflife.model.Speed.FAST;
+import static lowe.mike.gameoflife.model.Speed.FASTEST;
+import static lowe.mike.gameoflife.model.Speed.MEDIUM;
+import static lowe.mike.gameoflife.model.Speed.SLOW;
+
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -12,14 +20,6 @@ import javafx.scene.layout.Pane;
 import lowe.mike.gameoflife.model.Cell;
 import lowe.mike.gameoflife.model.GameOfLife;
 import lowe.mike.gameoflife.model.Grid;
-
-import static javafx.scene.input.MouseEvent.MOUSE_CLICKED;
-import static javafx.scene.layout.GridPane.setFillHeight;
-import static javafx.scene.layout.GridPane.setFillWidth;
-import static lowe.mike.gameoflife.model.Speed.FAST;
-import static lowe.mike.gameoflife.model.Speed.FASTEST;
-import static lowe.mike.gameoflife.model.Speed.MEDIUM;
-import static lowe.mike.gameoflife.model.Speed.SLOW;
 
 /**
  * Controller for <i>The Game of Life</i> application.
@@ -67,10 +67,16 @@ public final class Controller {
 
   private void initializeSpeedToggleButtons() {
     ToggleGroup toggleGroup = new PersistentToggleGroup();
-    toggleGroup.getToggles().addAll(slowToggleButton, mediumToggleButton, fastToggleButton, fastestToggleButton);
+    toggleGroup.getToggles()
+        .addAll(slowToggleButton, mediumToggleButton, fastToggleButton, fastestToggleButton);
     slowToggleButton.setSelected(true);
   }
 
+  /**
+   * Sets {@link GameOfLife} instance.
+   *
+   * @param gameOfLife {@link GameOfLife} instance
+   */
   public void setGameOfLife(GameOfLife gameOfLife) {
     this.gameOfLife = gameOfLife;
     setGenerationNumberLabelTextProperty();
@@ -111,7 +117,8 @@ public final class Controller {
   }
 
   private void addAlivePropertyListener(int rowIndex, int columnIndex, Pane cellPane) {
-    BooleanProperty aliveProperty = gameOfLife.getGrid().getCell(rowIndex, columnIndex).aliveProperty();
+    BooleanProperty aliveProperty = gameOfLife.getGrid().getCell(rowIndex, columnIndex)
+        .aliveProperty();
     aliveProperty.addListener((observable, oldValue, newValue) -> {
       ObservableList<String> styleClass = cellPane.getStyleClass();
       if (newValue) {

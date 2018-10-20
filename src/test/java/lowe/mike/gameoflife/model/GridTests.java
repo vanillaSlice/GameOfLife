@@ -1,11 +1,13 @@
 package lowe.mike.gameoflife.model;
 
+import static org.junit.Assert.assertEquals;
+
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-
 /**
+ * Grid tests.
+ *
  * @author Mike Lowe
  */
 public final class GridTests {

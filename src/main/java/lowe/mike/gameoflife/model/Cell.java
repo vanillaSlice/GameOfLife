@@ -4,8 +4,7 @@ import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
 /**
- * {@code Cell} instances represent cells that make up a grid in <i>The Game of
- * Life</i>.
+ * {@code Cell} instances represent cells that make up a grid in <i>The Game of Life</i>.
  *
  * @author Mike Lowe
  */
@@ -31,30 +30,33 @@ public final class Cell {
   }
 
   /**
-   * @return {@code true} if this {@code Cell} is alive; {@code false} if it
-   * is dead
+   * Return if this {@code Cell} is alive.
+   *
+   * @return {@code true} if this {@code Cell} is alive; {@code false} if it is dead
    */
   public boolean isAlive() {
     return isAlive.get();
   }
 
   /**
-   * @param isAlive {@code true} if this {@code Cell} is alive; {@code false} if
-   *                it is dead
+   * Set if this {@code Cell} is alive.
+   *
+   * @param isAlive {@code true} if this {@code Cell} is alive; {@code false} if it is dead
    */
   public void setAlive(boolean isAlive) {
     this.isAlive.set(isAlive);
   }
 
   /**
-   * Sets this {@code Cell} as alive if it is dead; or sets it as dead if it
-   * is alive.
+   * Sets this {@code Cell} as alive if it is dead; or sets it as dead if it is alive.
    */
   public void toggleAlive() {
     setAlive(!isAlive());
   }
 
   /**
+   * Returns this {@code Cell}'s alive {@link BooleanProperty}.
+   *
    * @return this {@code Cell}'s alive {@link BooleanProperty}
    */
   public BooleanProperty aliveProperty() {
@@ -62,10 +64,9 @@ public final class Cell {
   }
 
   /**
-   * Calculates this {@code Cell}'s next state by applying the rules of <i>The
-   * Game of Life</i>.
-   * <p>
-   * The four rules of <i>The Game of Life</i> are:
+   * Calculates this {@code Cell}'s next state by applying the rules of <i>The Game of Life</i>.
+   *
+   * <p>The four rules of <i>The Game of Life</i> are:
    * <ul>
    * <li>Any live {@link Cell} with fewer than two live neighbours dies, i.e.
    * under population.</li>

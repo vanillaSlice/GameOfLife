@@ -1,5 +1,9 @@
 package lowe.mike.gameoflife;
 
+import static javafx.application.Platform.exit;
+
+import java.io.IOException;
+import java.net.URL;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -8,11 +12,6 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import lowe.mike.gameoflife.controller.Controller;
 import lowe.mike.gameoflife.model.GameOfLife;
-
-import java.io.IOException;
-import java.net.URL;
-
-import static javafx.application.Platform.exit;
 
 /**
  * Entry point for <i>The Game of Life</i> application.
@@ -58,12 +57,12 @@ public final class GameOfLifeApplication extends Application {
     FXMLLoader loader = new FXMLLoader();
     URL location = GameOfLifeApplication.class.getResource(VIEW_RESOURCE_PATH);
     loader.setLocation(location);
-    view = loadFXML(loader);
+    view = loadFxml(loader);
     Controller controller = loader.getController();
     controller.setGameOfLife(gameOfLife);
   }
 
-  private static <T> T loadFXML(FXMLLoader loader) {
+  private static <T> T loadFxml(FXMLLoader loader) {
     try {
       return loader.load();
     } catch (IOException e) {

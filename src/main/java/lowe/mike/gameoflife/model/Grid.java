@@ -1,10 +1,10 @@
 package lowe.mike.gameoflife.model;
 
+import static java.util.Arrays.deepToString;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-
-import static java.util.Arrays.deepToString;
 
 /**
  * {@code Grid} instances represent the grid in <i>The Game of Life</i>.
@@ -18,10 +18,9 @@ public final class Grid {
   private final Cell[][] cells;
 
   /**
-   * Creates a new {@code Grid} instance given the number of rows and columns
-   * to add.
+   * Creates a new {@code Grid} instance given the number of rows and columns to add.
    *
-   * @param numberOfRows    the number of rows
+   * @param numberOfRows the number of rows
    * @param numberOfColumns the number of columns
    */
   Grid(int numberOfRows, int numberOfColumns) {
@@ -77,10 +76,10 @@ public final class Grid {
   }
 
   /**
-   * Returns the {@link Cell} at the given index. Note that the index is
-   * wrapped around so that a {@link Cell} is always returned.
+   * Returns the {@link Cell} at the given index. Note that the index is wrapped around so that a
+   * {@link Cell} is always returned.
    *
-   * @param rowIndex    the row index of the {@link Cell}
+   * @param rowIndex the row index of the {@link Cell}
    * @param columnIndex the column index of the {@link Cell}
    * @return the {@link Cell} at the given row and column index
    */
@@ -97,6 +96,8 @@ public final class Grid {
   }
 
   /**
+   * Returns the number of rows in this {@code Grid}.
+   *
    * @return the number of rows in this {@code Grid}
    */
   public int getNumberOfRows() {
@@ -104,6 +105,8 @@ public final class Grid {
   }
 
   /**
+   * Returns the number of columns in this {@code Grid}.
+   *
    * @return the number of columns in this {@code Grid}
    */
   public int getNumberOfColumns() {
@@ -111,8 +114,7 @@ public final class Grid {
   }
 
   /**
-   * Transitions all {@link Cell}s in this {@code Grid} to the next
-   * generation.
+   * Transitions all {@link Cell}s in this {@code Grid} to the next generation.
    */
   void nextGeneration() {
     calculateCellsNextState();

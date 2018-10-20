@@ -1,8 +1,7 @@
 package lowe.mike.gameoflife.model;
 
 /**
- * The {@code Speed} enum is used to dictate the speed of <i>The Game of
- * Life</i>.
+ * The {@code Speed} enum is used to dictate the speed of <i>The Game of Life</i>.
  *
  * @author Mike Lowe
  */
