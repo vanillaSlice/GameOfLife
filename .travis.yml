@@ -2,6 +2,8 @@ language: java
 branches:
   only:
   - master
+os:
+  - linux
 matrix:
   include:
     # Headless Linux
