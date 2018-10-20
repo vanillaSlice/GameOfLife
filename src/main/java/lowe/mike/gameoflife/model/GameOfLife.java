@@ -19,7 +19,7 @@ import javafx.util.Duration;
  *
  * @author Mike Lowe
  */
-public final class GameOfLife {
+public class GameOfLife {
 
   private final Grid grid;
   private final ReadOnlyLongWrapper generation = new ReadOnlyLongWrapper();

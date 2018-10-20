@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
  *
  * @author Mike Lowe
  */
-public final class GameOfLifeTest {
+public class GameOfLifeTest {
 
   private GameOfLife gameOfLife;
 
