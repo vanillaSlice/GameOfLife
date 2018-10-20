@@ -1,4 +1,7 @@
 language: java
+branches:
+  only:
+  - master
 after_success:
 - ./gradlew jacocoTestReport coveralls
 # A peculiarity of dependency caching in Gradle means that to avoid uploading the cache after every
