@@ -1,5 +1,6 @@
 # Game of Life
 [![Build Status](https://travis-ci.org/vanillaSlice/GameOfLife.svg?branch=master)](https://travis-ci.org/vanillaSlice/GameOfLife)
+[![Coverage Status](https://coveralls.io/repos/github/vanillaSlice/GameOfLife/badge.svg?branch=master)](https://coveralls.io/github/vanillaSlice/GameOfLife?branch=master)
 
 Game of Life is a cellular automaton devised by mathematician John Conway.
 
