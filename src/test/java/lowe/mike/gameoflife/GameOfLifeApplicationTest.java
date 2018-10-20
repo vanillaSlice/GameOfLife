@@ -6,10 +6,12 @@ import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
 import java.util.concurrent.TimeUnit;
 import javafx.stage.Stage;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
 import org.testfx.framework.junit5.ApplicationExtension;
+import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.framework.junit5.Start;
 import org.testfx.util.WaitForAsyncUtils;
 
@@ -19,13 +21,13 @@ import org.testfx.util.WaitForAsyncUtils;
 @ExtendWith(ApplicationExtension.class)
 public class GameOfLifeApplicationTest {
 
-  @Start
-  void onStart(Stage stage) {
-    new GameOfLifeApplication().start(stage);
+  @BeforeAll
+  public static void onStart() throws Exception {
+    ApplicationTest.launch(GameOfLifeApplication.class);
   }
 
   @Test
-  void playButtonClick_startsGameOfLife(FxRobot robot) {
+  public void playButtonClick_startsGameOfLife(FxRobot robot) {
     // initial verification
     verifyThat("#generationNumberLabel", hasText("0"));
 
