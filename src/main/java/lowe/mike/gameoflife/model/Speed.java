@@ -15,7 +15,7 @@ public enum Speed {
     this.milliseconds = milliseconds;
   }
 
-  double getMilliseconds() {
+  public double getMilliseconds() {
     return milliseconds;
   }
 

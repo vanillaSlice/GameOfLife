@@ -1,5 +1,9 @@
 package lowe.mike.gameoflife.model;
 
+import static java.util.Objects.requireNonNull;
+
+import java.util.Arrays;
+import java.util.stream.Collectors;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
@@ -8,7 +12,7 @@ import javafx.beans.property.SimpleBooleanProperty;
  *
  * @author Mike Lowe
  */
-public final class Cell {
+public class Cell {
 
   private Cell[] neighbours;
   private final BooleanProperty isAlive = new SimpleBooleanProperty();
@@ -17,25 +21,26 @@ public final class Cell {
   /**
    * Creates a new {@code Cell} instance.
    */
-  Cell() {
+  public Cell() {
   }
 
   /**
    * Sets this {@code Cell}'s array of neighbouring {@code Cell}s.
    *
    * @param neighbours the array of neighbouring {@code Cell}s
+   * @throws NullPointerException if {@code neighbours} is {@code null}
    */
-  void setNeighbours(Cell[] neighbours) {
-    this.neighbours = neighbours;
+  public void setNeighbours(Cell[] neighbours) {
+    this.neighbours = requireNonNull(neighbours, "neighbours is null");
   }
 
   /**
-   * Return if this {@code Cell} is alive.
+   * Returns if this {@code Cell} is alive.
    *
    * @return {@code true} if this {@code Cell} is alive; {@code false} if it is dead
    */
   public boolean isAlive() {
-    return isAlive.get();
+    return aliveProperty().get();
   }
 
   /**
@@ -44,7 +49,7 @@ public final class Cell {
    * @param isAlive {@code true} if this {@code Cell} is alive; {@code false} if it is dead
    */
   public void setAlive(boolean isAlive) {
-    this.isAlive.set(isAlive);
+    aliveProperty().set(isAlive);
   }
 
   /**
@@ -78,42 +83,21 @@ public final class Cell {
    * live cell, i.e. reproduction.</li>
    * </ul>
    */
-  void calculateNextState() {
-    int numberOfAliveNeighbours = countNumberOfAliveNeighbours();
+  public void calculateNextState() {
+    int numberOfAliveNeighbours = Arrays.stream(neighbours)
+        .filter(Cell::isAlive)
+        .collect(Collectors.toList())
+        .size();
 
-    if (isAlive()) {
-      setAliveInNextState(numberOfAliveNeighbours == 2 || numberOfAliveNeighbours == 3);
-    } else {
-      setAliveInNextState(numberOfAliveNeighbours == 3);
-    }
-  }
-
-  private int countNumberOfAliveNeighbours() {
-    int count = 0;
-
-    for (Cell neighbour : neighbours) {
-      if (neighbour.isAlive()) {
-        count++;
-      }
-    }
-
-    return count;
-  }
-
-  private void setAliveInNextState(boolean isAliveInNextState) {
-    this.isAliveInNextState = isAliveInNextState;
+    isAliveInNextState =
+        ((isAlive() && numberOfAliveNeighbours == 2) || numberOfAliveNeighbours == 3);
   }
 
   /**
    * Transitions this {@code Cell} to the next state.
    */
-  void goToNextState() {
+  public void goToNextState() {
     setAlive(isAliveInNextState);
-  }
-
-  @Override
-  public String toString() {
-    return Boolean.toString(isAlive());
   }
 
 }
