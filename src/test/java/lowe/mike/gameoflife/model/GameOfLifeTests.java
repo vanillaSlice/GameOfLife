@@ -1,9 +1,9 @@
 package lowe.mike.gameoflife.model;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Game of Life tests.
@@ -14,7 +14,7 @@ public final class GameOfLifeTests {
 
   private GameOfLife gameOfLife;
 
-  @Before
+  @BeforeEach
   public void setup() {
     gameOfLife = new GameOfLife(3, 3);
   }

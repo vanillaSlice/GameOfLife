@@ -1,9 +1,9 @@
 package lowe.mike.gameoflife.model;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Grid tests.
@@ -17,7 +17,7 @@ public final class GridTests {
   private Grid grid;
   private boolean[][] expectedAlive;
 
-  @Before
+  @BeforeEach
   public void setup() {
     grid = new Grid(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS);
     expectedAlive = new boolean[NUMBER_OF_ROWS][NUMBER_OF_COLUMNS];

@@ -1,9 +1,9 @@
 package lowe.mike.gameoflife.model;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * Cell tests.
@@ -19,7 +19,7 @@ public final class CellTests {
   /**
    * Test setup.
    */
-  @Before
+  @BeforeEach
   public void setUp() {
     cell = new Cell();
     neighbours = new Cell[NUMBER_OF_NEIGHBOURS];
