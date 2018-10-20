@@ -18,7 +18,7 @@ import lowe.mike.gameoflife.model.GameOfLife;
  *
  * @author Mike Lowe
  */
-public final class GameOfLifeApplication extends Application {
+public class GameOfLifeApplication extends Application {
 
   private static final String APP_NAME = "Game of Life";
   private static final int NUMBER_OF_ROWS = 40;
