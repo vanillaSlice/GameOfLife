@@ -7,6 +7,8 @@ plugins {
 }
 
 version = '1.0.0'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
 
 repositories {
     mavenCentral()
@@ -39,6 +41,18 @@ jacocoTestReport {
     }
 }
 
+jacocoTestCoverageVerification {
+    violationRules {
+        rule {
+            limit {
+                minimum = 0.45
+            }
+        }
+    }
+}
+
+check.dependsOn jacocoTestCoverageVerification
+
 task buildFatJar(type: Jar) {
     manifest {
         attributes 'Implementation-Title': 'Game of Life',
@@ -50,4 +64,4 @@ task buildFatJar(type: Jar) {
     with jar
 }
 
-build.finalizedBy(buildFatJar)
+build.finalizedBy buildFatJar

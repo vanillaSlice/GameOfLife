@@ -19,7 +19,7 @@ import javafx.util.Duration;
  *
  * @author Mike Lowe
  */
-public final class GameOfLife {
+public class GameOfLife {
 
   private final Grid grid;
   private final ReadOnlyLongWrapper generation = new ReadOnlyLongWrapper();
@@ -32,6 +32,8 @@ public final class GameOfLife {
    *
    * @param numberOfRows the number of rows
    * @param numberOfColumns the number of columns
+   * @throws NegativeArraySizeException if {@code numberOfRows} or {@code numberOfColumns} are
+   *     less than 0
    */
   public GameOfLife(int numberOfRows, int numberOfColumns) {
     this.grid = new Grid(numberOfRows, numberOfColumns);
@@ -54,7 +56,7 @@ public final class GameOfLife {
   /**
    * Transitions into the next generation.
    */
-  void next() {
+  public void next() {
     grid.nextGeneration();
     generation.set(getGeneration() + 1);
   }
@@ -116,15 +118,6 @@ public final class GameOfLife {
   }
 
   /**
-   * Returns the {@link Speed} {@link ObjectProperty} of the game.
-   *
-   * @return the {@link Speed} {@link ObjectProperty} of the game
-   */
-  public ObjectProperty<Speed> speedProperty() {
-    return speed;
-  }
-
-  /**
    * Plays the game.
    */
   public void play() {
@@ -145,11 +138,6 @@ public final class GameOfLife {
     pause();
     grid.clear();
     generation.set(0);
-  }
-
-  @Override
-  public String toString() {
-    return "[generation=" + getGeneration() + ", grid=" + grid + "]";
   }
 
 }

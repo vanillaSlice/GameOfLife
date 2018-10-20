@@ -10,17 +10,20 @@ import org.junit.jupiter.api.Test;
  *
  * @author Mike Lowe
  */
-public final class GameOfLifeTests {
+public class GameOfLifeTest {
 
   private GameOfLife gameOfLife;
 
+  /**
+   * Test setup.
+   */
   @BeforeEach
-  public void setup() {
+  public void setUp() {
     gameOfLife = new GameOfLife(3, 3);
   }
 
   @Test
-  public void test_next() {
+  public void next() {
     // execution and verification
     gameOfLife.next();
     assertEquals(1, gameOfLife.getGeneration());
@@ -31,7 +34,7 @@ public final class GameOfLifeTests {
   }
 
   @Test
-  public void test_clear() {
+  public void clear() {
     // setup
     gameOfLife.play();
 

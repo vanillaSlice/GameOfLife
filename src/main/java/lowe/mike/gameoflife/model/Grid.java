@@ -1,7 +1,5 @@
 package lowe.mike.gameoflife.model;
 
-import static java.util.Arrays.deepToString;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -11,7 +9,7 @@ import java.util.Objects;
  *
  * @author Mike Lowe
  */
-public final class Grid {
+public class Grid {
 
   private final int numberOfRows;
   private final int numberOfColumns;
@@ -22,8 +20,10 @@ public final class Grid {
    *
    * @param numberOfRows the number of rows
    * @param numberOfColumns the number of columns
+   * @throws NegativeArraySizeException if {@code numberOfRows} or {@code numberOfColumns} are
+   *     less than 0
    */
-  Grid(int numberOfRows, int numberOfColumns) {
+  public Grid(int numberOfRows, int numberOfColumns) {
     this.numberOfRows = numberOfRows;
     this.numberOfColumns = numberOfColumns;
     this.cells = new Cell[this.numberOfRows][this.numberOfColumns];
@@ -36,16 +36,16 @@ public final class Grid {
   }
 
   private void createNewCells() {
-    for (int rowIndex = 0; rowIndex < numberOfRows; rowIndex++) {
-      for (int columnIndex = 0; columnIndex < numberOfColumns; columnIndex++) {
+    for (int rowIndex = 0; rowIndex < getNumberOfRows(); rowIndex++) {
+      for (int columnIndex = 0; columnIndex < getNumberOfColumns(); columnIndex++) {
         cells[rowIndex][columnIndex] = new Cell();
       }
     }
   }
 
   private void setCellNeighbours() {
-    for (int rowIndex = 0; rowIndex < numberOfRows; rowIndex++) {
-      for (int columnIndex = 0; columnIndex < numberOfColumns; columnIndex++) {
+    for (int rowIndex = 0; rowIndex < getNumberOfRows(); rowIndex++) {
+      for (int columnIndex = 0; columnIndex < getNumberOfColumns(); columnIndex++) {
         Cell[] neighbours = getNeighbours(rowIndex, columnIndex);
         Cell cell = getCell(rowIndex, columnIndex);
         cell.setNeighbours(neighbours);
@@ -76,8 +76,9 @@ public final class Grid {
   }
 
   /**
-   * Returns the {@link Cell} at the given index. Note that the index is wrapped around so that a
-   * {@link Cell} is always returned.
+   * Returns the {@link Cell} at the given index.
+   *
+   * <p>Note that the index is wrapped around so that a {@link Cell} is always returned.
    *
    * @param rowIndex the row index of the {@link Cell}
    * @param columnIndex the column index of the {@link Cell}
@@ -88,11 +89,11 @@ public final class Grid {
   }
 
   private int getWrappedRowIndex(int rowIndex) {
-    return (rowIndex + numberOfRows) % numberOfRows;
+    return (rowIndex + getNumberOfRows()) % getNumberOfRows();
   }
 
   private int getWrappedColumnIndex(int columnIndex) {
-    return (columnIndex + numberOfColumns) % numberOfColumns;
+    return (columnIndex + getNumberOfColumns()) % getNumberOfColumns();
   }
 
   /**
@@ -116,7 +117,7 @@ public final class Grid {
   /**
    * Transitions all {@link Cell}s in this {@code Grid} to the next generation.
    */
-  void nextGeneration() {
+  public void nextGeneration() {
     calculateCellsNextState();
     transitionCellsToNextState();
   }
@@ -140,17 +141,12 @@ public final class Grid {
   /**
    * Sets all {@link Cell}s in this {@code Grid} as dead.
    */
-  void clear() {
+  public void clear() {
     for (Cell[] row : cells) {
       for (Cell cell : row) {
         cell.setAlive(false);
       }
     }
-  }
-
-  @Override
-  public String toString() {
-    return deepToString(cells);
   }
 
 }
