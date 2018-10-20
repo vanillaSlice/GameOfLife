@@ -15,8 +15,6 @@ import org.junit.jupiter.api.Test;
  */
 public class CellTest {
 
-  private static final int NUMBER_OF_NEIGHBOURS = 4;
-
   private Cell cell;
   private Cell[] neighbours;
 
@@ -27,8 +25,8 @@ public class CellTest {
   public void setUp() {
     cell = new Cell();
 
-    neighbours = new Cell[NUMBER_OF_NEIGHBOURS];
-    for (int i = 0; i < NUMBER_OF_NEIGHBOURS; i++) {
+    neighbours = new Cell[4];
+    for (int i = 0; i < 4; i++) {
       neighbours[i] = new Cell();
     }
 
@@ -44,6 +42,7 @@ public class CellTest {
 
   @Test
   public void toggleAlive_togglesAliveState() {
+    cell.setAlive(false);
     assertFalse(cell.isAlive());
     cell.toggleAlive();
     assertTrue(cell.isAlive());
@@ -53,45 +52,45 @@ public class CellTest {
 
   @Test
   public void calculateNextState_aliveWith1Neighbour_cellDies() {
-    calculateNextStateTest(true, 1, false);
+    verifyNextState(true, 1, false);
   }
 
   @Test
   public void calculateNextState_aliveWith2Neighbours_cellLives() {
-    calculateNextStateTest(true, 2, true);
+    verifyNextState(true, 2, true);
   }
 
   @Test
   public void calculateNextState_aliveWith3Neighbours_cellLives() {
-    calculateNextStateTest(true, 3, true);
+    verifyNextState(true, 3, true);
   }
 
   @Test
   public void calculateNextState_aliveWith4Neighbours_cellDies() {
-    calculateNextStateTest(true, 4, false);
+    verifyNextState(true, 4, false);
   }
 
   @Test
   public void calculateNextState_deadWith1Neighbour_cellDies() {
-    calculateNextStateTest(false, 1, false);
+    verifyNextState(false, 1, false);
   }
 
   @Test
   public void calculateNextState_deadWith2Neighbours_cellDies() {
-    calculateNextStateTest(false, 2, false);
+    verifyNextState(false, 2, false);
   }
 
   @Test
   public void calculateNextState_deadWith3Neighbours_cellLives() {
-    calculateNextStateTest(false, 3, true);
+    verifyNextState(false, 3, true);
   }
 
   @Test
   public void calculateNextState_deadWith4Neighbours_cellDies() {
-    calculateNextStateTest(false, 4, false);
+    verifyNextState(false, 4, false);
   }
 
-  private void calculateNextStateTest(boolean isAlive,
+  private void verifyNextState(boolean isAlive,
       int numberOfAliveNeighbours,
       boolean expectedAlive) {
     // setup

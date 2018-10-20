@@ -144,7 +144,7 @@ public class GridTest {
   }
 
   @Test
-  public void clear() {
+  public void clear_allCellsDead() {
     // setup
     grid.getCell(0, 0).setAlive(true);
     expectedAlive[0][0] = true;

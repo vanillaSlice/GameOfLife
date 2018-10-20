@@ -44,7 +44,7 @@ public class Cell {
   }
 
   /**
-   * Set if this {@code Cell} is alive.
+   * Sets if this {@code Cell} is alive.
    *
    * @param isAlive {@code true} if this {@code Cell} is alive; {@code false} if it is dead
    */
@@ -73,14 +73,13 @@ public class Cell {
    *
    * <p>The four rules of <i>The Game of Life</i> are:
    * <ul>
-   * <li>Any live {@link Cell} with fewer than two live neighbours dies, i.e.
-   * under population.</li>
-   * <li>Any live {@link Cell} with two or three live neighbours lives on to
-   * the next generation.</li>
-   * <li>Any live {@link Cell} with more than three live neighbours dies, i.e.
-   * overpopulation.</li>
-   * <li>Any dead {@link Cell} with exactly three live neighbours becomes a
-   * live cell, i.e. reproduction.</li>
+   * <li>Any live {@link Cell} with fewer than two live neighbours dies, i.e. under
+   * population.</li>
+   * <li>Any live {@link Cell} with two or three live neighbours lives on to the next
+   * generation.</li>
+   * <li>Any live {@link Cell} with more than three live neighbours dies, i.e. overpopulation.</li>
+   * <li>Any dead {@link Cell} with exactly three live neighbours becomes a live cell, i.e.
+   * reproduction.</li>
    * </ul>
    */
   public void calculateNextState() {

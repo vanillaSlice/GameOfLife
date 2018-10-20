@@ -26,7 +26,7 @@ import lowe.mike.gameoflife.model.Grid;
  *
  * @author Mike Lowe
  */
-public final class Controller {
+public class Controller {
 
   private static final double CELL_SIZE = 14;
   private static final String CELL_PANE_STYLE_CLASS = "cellPane";
