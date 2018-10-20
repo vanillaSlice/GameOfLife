@@ -19,6 +19,7 @@ dependencies {
     testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.3.1'
     testCompile group: 'org.testfx', name: 'testfx-core', version: '4.0.15-alpha'
     testCompile group: 'org.testfx', name: 'testfx-junit5', version: '4.0.15-alpha'
+    testCompile group: 'org.testfx', name: 'openjfx-monocle', version: '8u76-b04'
 }
 
 test {
