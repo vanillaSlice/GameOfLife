@@ -36,27 +36,27 @@ To build the project:
 3. If you have Gradle installed locally, run the Gradle Daemon:
 
     ```
-    gradle clean build
+    gradle clean buildFatJar
     ```
 
    If you don't have Gradle installed locally and are running on a Unix-like platform such as Linux or Mac OS X, run:
 
     ```
-    ./gradlew clean build
+    ./gradlew clean buildFatJar
     ```
 
    If you don't have Gradle installed locally and are running on Windows, run:
 
     ```
-    gradlew clean build
+    gradlew clean buildFatJar
     ```
 
 ### Running
-Once built, to run the application go to `build/libs` and double-click `GameOfLife-all-1.0.0.jar` or from your
+Once built, to run the application go to `build/libs` and double-click `GameOfLife-all-1.1.0.jar` or from your
 terminal/command prompt run:
 
 ```
-java -jar GameOfLife-all-1.0.0.jar
+java -jar GameOfLife-all-1.1.0.jar
 ```
 
 ## Technology Used
