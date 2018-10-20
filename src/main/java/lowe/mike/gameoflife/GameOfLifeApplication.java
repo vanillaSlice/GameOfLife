@@ -22,7 +22,7 @@ public class GameOfLifeApplication extends Application {
 
   private static final String APP_NAME = "Game of Life";
   private static final int NUMBER_OF_ROWS = 40;
-  private static final int NUMBER_OF_COLUMNS = 60;
+  private static final int NUMBER_OF_COLUMNS = 70;
   private static final String VIEW_RESOURCE_PATH = "/view/View.fxml";
   private static final Image ICON_64X64 = new Image("/view/icon-64x64.png");
   private static final Image ICON_32X32 = new Image("/view/icon-32x32.png");

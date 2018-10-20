@@ -4,6 +4,7 @@ import static javafx.animation.Animation.INDEFINITE;
 import static javafx.animation.Animation.Status.RUNNING;
 import static lowe.mike.gameoflife.model.Speed.SLOW;
 
+import java.util.Random;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.ObjectProperty;
@@ -20,6 +21,8 @@ import javafx.util.Duration;
  * @author Mike Lowe
  */
 public class GameOfLife {
+
+  private static final Random RANDOM = new Random();
 
   private final Grid grid;
   private final ReadOnlyLongWrapper generation = new ReadOnlyLongWrapper();
@@ -39,6 +42,7 @@ public class GameOfLife {
     this.grid = new Grid(numberOfRows, numberOfColumns);
     updateTimeline();
     addSpeedPropertyListener();
+    randomGeneration();
   }
 
   private void updateTimeline() {
@@ -138,6 +142,22 @@ public class GameOfLife {
     pause();
     grid.clear();
     generation.set(0);
+  }
+
+  /**
+   * Clears the current game and randomly generates a new one.
+   */
+  public void reset() {
+    clear();
+    randomGeneration();
+  }
+
+  private void randomGeneration() {
+    for (int rowIndex = 0; rowIndex < grid.getNumberOfRows(); rowIndex++) {
+      for (int columnIndex = 0; columnIndex < grid.getNumberOfColumns(); columnIndex++) {
+        grid.getCell(rowIndex, columnIndex).setAlive(RANDOM.nextBoolean());
+      }
+    }
   }
 
 }

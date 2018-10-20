@@ -8,6 +8,7 @@ import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
 import java.util.concurrent.TimeUnit;
+import java.util.function.Predicate;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 import org.junit.jupiter.api.BeforeEach;
@@ -61,6 +62,19 @@ public class GameOfLifeApplicationTest {
     WaitForAsyncUtils.sleep(2, TimeUnit.SECONDS);
     String generationAfter = robot.lookup("#generationNumberLabel").queryLabeled().getText();
     assertEquals(generationBefore, generationAfter);
+  }
+
+  @Test
+  public void resetButtonClick_resetsGameOfLife(FxRobot robot) {
+    // initial setup
+    robot.clickOn("#playToggleButton");
+    WaitForAsyncUtils.sleep(2, TimeUnit.SECONDS);
+
+    // execution
+    robot.clickOn("#resetButton");
+
+    // verification
+    verifyThat("#generationNumberLabel", hasText("0"));
   }
 
   @Test
@@ -129,8 +143,10 @@ public class GameOfLifeApplicationTest {
   @Test
   public void cellClick_togglesAlive(FxRobot robot) {
     // initial setup
-    Pane cellPane = robot.lookup(".cellPane").query();
-    cellPane.getStyleClass().remove("alive");
+    Pane cellPane = robot
+        .lookup(".cellPane")
+        .lookup((Predicate<Pane>) p -> !p.getStyleClass().contains("alive"))
+        .query();
 
     // execution
     robot.clickOn(cellPane);

@@ -104,6 +104,7 @@ public class Controller {
 
     addCellPaneStyle(cellPane);
     addAlivePropertyListener(rowIndex, columnIndex, cellPane);
+    setAliveStyle(cellPane, gameOfLife.getGrid().getCell(rowIndex, columnIndex).isAlive());
     addClickEventHandler(rowIndex, columnIndex, cellPane);
 
     gridPane.add(cellPane, columnIndex, rowIndex);
@@ -119,14 +120,17 @@ public class Controller {
   private void addAlivePropertyListener(int rowIndex, int columnIndex, Pane cellPane) {
     BooleanProperty aliveProperty = gameOfLife.getGrid().getCell(rowIndex, columnIndex)
         .aliveProperty();
-    aliveProperty.addListener((observable, oldValue, newValue) -> {
-      ObservableList<String> styleClass = cellPane.getStyleClass();
-      if (newValue) {
-        styleClass.add(ALIVE_STYLE_CLASS);
-      } else {
-        styleClass.remove(ALIVE_STYLE_CLASS);
-      }
-    });
+    aliveProperty.addListener((observable, oldValue, newValue) ->
+        setAliveStyle(cellPane, newValue));
+  }
+
+  private void setAliveStyle(Pane cellPane, boolean isAlive) {
+    ObservableList<String> styleClass = cellPane.getStyleClass();
+    if (isAlive) {
+      styleClass.add(ALIVE_STYLE_CLASS);
+    } else {
+      styleClass.remove(ALIVE_STYLE_CLASS);
+    }
   }
 
   private void addClickEventHandler(int rowIndex, int columnIndex, Pane cellPane) {
@@ -142,6 +146,12 @@ public class Controller {
   @FXML
   private void pauseToggleButtonAction() {
     gameOfLife.pause();
+  }
+
+  @FXML
+  private void resetButtonAction() {
+    gameOfLife.reset();
+    pauseToggleButton.setSelected(true);
   }
 
   @FXML
