@@ -52,10 +52,11 @@ To build the project:
     ```
 
 ### Running
-Once built, to run the application go to `build/libs` and double-click GameOfLife-all-[version].jar or from your
+Once built, to run the application go to `build/libs` and double-click `GameOfLife-all-1.0.0.jar` or from your
 terminal/command prompt run:
+
 ```
-java -jar GameOfLife-all-[version].jar
+java -jar GameOfLife-all-1.0.0.jar
 ```
 
 ## Technology Used
