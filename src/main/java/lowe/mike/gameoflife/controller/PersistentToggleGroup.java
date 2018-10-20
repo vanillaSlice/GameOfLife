@@ -13,12 +13,12 @@ import javafx.scene.control.ToggleGroup;
  *
  * @author Mike Lowe
  */
-final class PersistentToggleGroup extends ToggleGroup {
+public class PersistentToggleGroup extends ToggleGroup {
 
   /**
    * Creates a new {@code PersistentToggleGroup}.
    */
-  PersistentToggleGroup() {
+  public PersistentToggleGroup() {
     addTogglesListener();
   }
 

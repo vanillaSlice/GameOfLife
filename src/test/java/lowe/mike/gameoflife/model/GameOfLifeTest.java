@@ -1,12 +1,13 @@
 package lowe.mike.gameoflife.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
- * Game of Life tests.
+ * {@link GameOfLife} tests.
  *
  * @author Mike Lowe
  */
@@ -20,6 +21,18 @@ public class GameOfLifeTest {
   @BeforeEach
   public void setUp() {
     gameOfLife = new GameOfLife(3, 3);
+  }
+
+  @Test
+  public void constructor_negativeNumberOfRows_throwsNegativeArraySizeException() {
+    assertThrows(NegativeArraySizeException.class,
+        () -> new GameOfLife(-1, 3));
+  }
+
+  @Test
+  public void constructor_negativeNumberOfColumns_throwsNegativeArraySizeException() {
+    assertThrows(NegativeArraySizeException.class,
+        () -> new GameOfLife(3, -1));
   }
 
   @Test
