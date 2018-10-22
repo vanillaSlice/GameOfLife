@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,32 +18,26 @@ import org.junit.jupiter.api.Test;
  */
 public class CellTest {
 
-  private Cell cell;
-  private Set<Cell> neighbours;
+  private final Cell cell = new Cell();
+  private final Set<Cell> neighbours =
+      new HashSet<>(Arrays.asList(new Cell(), new Cell(), new Cell(), new Cell()));
 
   /**
    * Test setup.
    */
   @BeforeEach
   public void setUp() {
-    cell = new Cell();
-
-    neighbours = new HashSet<>(Arrays.asList(new Cell(), new Cell(), new Cell(), new Cell()));
-
     cell.setNeighbours(neighbours);
   }
 
   @Test
   public void setNeighbours_withNull_throwsNullPointerException() {
-    assertThrows(NullPointerException.class,
-        () -> cell.setNeighbours(null),
-        "neighbours is null");
+    assertThrows(NullPointerException.class, () -> cell.setNeighbours(null), "neighbours is null");
   }
 
   @Test
   public void toggleAlive_togglesAliveState() {
     // execution and verification
-    cell.setAlive(false);
     assertFalse(cell.isAlive());
     cell.toggleAlive();
     assertTrue(cell.isAlive());
@@ -97,11 +90,7 @@ public class CellTest {
       boolean expectedAlive) {
     // setup
     cell.setAlive(isAlive);
-
-    Iterator<Cell> neighbourIterator = neighbours.iterator();
-    for (int i = 0; i < numberOfAliveNeighbours; i++) {
-      neighbourIterator.next().setAlive(true);
-    }
+    neighbours.stream().limit(numberOfAliveNeighbours).forEach(cell -> cell.setAlive(true));
 
     // execution
     cell.calculateNextState();

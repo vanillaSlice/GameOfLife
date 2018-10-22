@@ -4,7 +4,6 @@ import static java.util.Objects.requireNonNull;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 
@@ -26,8 +25,7 @@ public class Cell {
    * @throws NullPointerException if {@code neighbours} is {@code null}
    */
   public void setNeighbours(Set<Cell> neighbours) {
-    requireNonNull(neighbours, "neighbours is null");
-    this.neighbours = new HashSet<>(neighbours);
+    this.neighbours = new HashSet<>(requireNonNull(neighbours, "neighbours is null"));
   }
 
   /**
@@ -79,10 +77,7 @@ public class Cell {
    * </ul>
    */
   public void calculateNextState() {
-    int numberOfAliveNeighbours = neighbours.stream()
-        .filter(Cell::isAlive)
-        .collect(Collectors.toList())
-        .size();
+    int numberOfAliveNeighbours = (int) neighbours.stream().filter(Cell::isAlive).count();
 
     isAliveInNextState =
         ((isAlive() && numberOfAliveNeighbours == 2) || numberOfAliveNeighbours == 3);
