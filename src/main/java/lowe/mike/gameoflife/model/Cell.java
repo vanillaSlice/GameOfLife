@@ -2,7 +2,8 @@ package lowe.mike.gameoflife.model;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -14,24 +15,19 @@ import javafx.beans.property.SimpleBooleanProperty;
  */
 public class Cell {
 
-  private Cell[] neighbours;
+  private Set<Cell> neighbours;
   private final BooleanProperty isAlive = new SimpleBooleanProperty();
   private boolean isAliveInNextState;
 
   /**
-   * Creates a new {@code Cell} instance.
-   */
-  public Cell() {
-  }
-
-  /**
-   * Sets this {@code Cell}'s array of neighbouring {@code Cell}s.
+   * Sets this {@code Cell}'s {@link Set} of neighbouring {@code Cell}s.
    *
-   * @param neighbours the array of neighbouring {@code Cell}s
+   * @param neighbours the {@link Set} of neighbouring {@code Cell}s
    * @throws NullPointerException if {@code neighbours} is {@code null}
    */
-  public void setNeighbours(Cell[] neighbours) {
-    this.neighbours = requireNonNull(neighbours, "neighbours is null");
+  public void setNeighbours(Set<Cell> neighbours) {
+    requireNonNull(neighbours, "neighbours is null");
+    this.neighbours = new HashSet<>(neighbours);
   }
 
   /**
@@ -83,7 +79,7 @@ public class Cell {
    * </ul>
    */
   public void calculateNextState() {
-    int numberOfAliveNeighbours = Arrays.stream(neighbours)
+    int numberOfAliveNeighbours = neighbours.stream()
         .filter(Cell::isAlive)
         .collect(Collectors.toList())
         .size();
