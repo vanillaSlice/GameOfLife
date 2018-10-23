@@ -19,10 +19,6 @@ public class PersistentToggleGroup extends ToggleGroup {
    * Creates a new {@code PersistentToggleGroup}.
    */
   public PersistentToggleGroup() {
-    addTogglesListener();
-  }
-
-  private void addTogglesListener() {
     getToggles().addListener((Change<? extends Toggle> change) -> {
       while (change.next()) {
         for (Toggle toggle : change.getAddedSubList()) {

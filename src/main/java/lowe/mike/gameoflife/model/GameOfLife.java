@@ -1,5 +1,6 @@
 package lowe.mike.gameoflife.model;
 
+import static java.util.Objects.requireNonNull;
 import static javafx.animation.Animation.INDEFINITE;
 import static javafx.animation.Animation.Status.RUNNING;
 import static lowe.mike.gameoflife.model.Speed.SLOW;
@@ -30,31 +31,23 @@ public class GameOfLife {
   private final ObjectProperty<Speed> speed = new SimpleObjectProperty<>(SLOW);
 
   /**
-   * Creates a new {@code GameOfLife} instance given the number of rows and columns to give the
-   * {@link Grid}.
+   * Creates a new {@code GameOfLife} instance given the underlying {@link Grid}.
    *
-   * @param numberOfRows the number of rows
-   * @param numberOfColumns the number of columns
-   * @throws NegativeArraySizeException if {@code numberOfRows} or {@code numberOfColumns} are
-   *     less than 0
+   * @param grid the underlying {@link Grid}
    */
-  public GameOfLife(int numberOfRows, int numberOfColumns) {
-    this.grid = new Grid(numberOfRows, numberOfColumns);
+  public GameOfLife(Grid grid) {
+    this.grid = requireNonNull(grid, "grid is null");
     updateTimeline();
     addSpeedPropertyListener();
-    randomGeneration();
+    grid.randomGeneration(RANDOM);
   }
 
   private void updateTimeline() {
     Duration duration = new Duration(getSpeed().getMilliseconds());
-    EventHandler<ActionEvent> eventHandler = getEventHandler();
+    EventHandler<ActionEvent> eventHandler = event -> next();
     KeyFrame keyFrame = new KeyFrame(duration, eventHandler);
     timeline = new Timeline(keyFrame);
     timeline.setCycleCount(INDEFINITE);
-  }
-
-  private EventHandler<ActionEvent> getEventHandler() {
-    return event -> next();
   }
 
   /**
@@ -116,9 +109,10 @@ public class GameOfLife {
    * Sets the {@link Speed} of the game.
    *
    * @param speed the {@link Speed} of the game
+   * @throws NullPointerException if {@code speed} is {@code null}
    */
   public void setSpeed(Speed speed) {
-    this.speed.set(speed);
+    this.speed.set(requireNonNull(speed, "speed cannot be null"));
   }
 
   /**
@@ -149,15 +143,7 @@ public class GameOfLife {
    */
   public void reset() {
     clear();
-    randomGeneration();
-  }
-
-  private void randomGeneration() {
-    for (int rowIndex = 0; rowIndex < grid.getNumberOfRows(); rowIndex++) {
-      for (int columnIndex = 0; columnIndex < grid.getNumberOfColumns(); columnIndex++) {
-        grid.getCell(rowIndex, columnIndex).setAlive(RANDOM.nextBoolean());
-      }
-    }
+    grid.randomGeneration(RANDOM);
   }
 
 }

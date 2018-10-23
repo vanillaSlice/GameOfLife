@@ -1,5 +1,6 @@
 package lowe.mike.gameoflife.controller;
 
+import static java.util.Objects.requireNonNull;
 import static javafx.scene.input.MouseEvent.MOUSE_CLICKED;
 import static javafx.scene.layout.GridPane.setFillHeight;
 import static javafx.scene.layout.GridPane.setFillWidth;
@@ -29,7 +30,7 @@ import lowe.mike.gameoflife.model.Grid;
 public class Controller {
 
   private static final double CELL_SIZE = 14;
-  private static final String CELL_PANE_STYLE_CLASS = "cellPane";
+  private static final String CELL_PANE_STYLE_CLASS = "cell-pane";
   private static final String ALIVE_STYLE_CLASS = "alive";
 
   @FXML
@@ -76,9 +77,10 @@ public class Controller {
    * Sets {@link GameOfLife} instance.
    *
    * @param gameOfLife {@link GameOfLife} instance
+   * @throws NullPointerException if {@code gameOfLife} is {@code null}
    */
   public void setGameOfLife(GameOfLife gameOfLife) {
-    this.gameOfLife = gameOfLife;
+    this.gameOfLife = requireNonNull(gameOfLife, "game of life is null");
     setGenerationNumberLabelTextProperty();
     initializeGridPane();
   }
