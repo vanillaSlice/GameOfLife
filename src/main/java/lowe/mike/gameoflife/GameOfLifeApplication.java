@@ -33,20 +33,17 @@ public class GameOfLifeApplication extends Application {
   private Stage primaryStage;
   private Parent view;
 
-  public GameOfLifeApplication() {
-    this(new GameOfLife(new Grid(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS)));
-  }
-
-  public GameOfLifeApplication(GameOfLife gameOfLife) {
-    this.gameOfLife = gameOfLife;
-  }
-
   @Override
   public void start(Stage primaryStage) {
+    initializeGameOfLife();
     initializePrimaryStage(primaryStage);
     initializeView();
     addIcons();
     showScene();
+  }
+
+  private void initializeGameOfLife() {
+    gameOfLife = new GameOfLife(new Grid(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS));
   }
 
   private void initializePrimaryStage(Stage primaryStage) {
