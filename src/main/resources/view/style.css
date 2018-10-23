@@ -1,11 +1,11 @@
 @font-face {
-  src: url("slkscrb.ttf");
+  src: url('slkscrb.ttf');
 }
 
 .root {
   -fx-focus-color: transparent;
-  -fx-font-family: "silkscreen";
-  -fx-font-size: 13.0px;
+  -fx-font-family: 'silkscreen';
+  -fx-font-size: 13px;
 }
 
 .background {
@@ -24,8 +24,8 @@
 .button:hover,
 .button:selected {
   -fx-background-color: #ffffff;
-  -fx-background-insets: 0.0px 0.0px -1.0px 0.0px, 0.0px, 1.0px, 2.0px;
-  -fx-background-radius: 5.0px, 5.0px, 4.0px, 3.0px;
+  -fx-background-insets: 0px 0px -1px 0px, 0px, 1px, 2px;
+  -fx-background-radius: 5px, 5px, 4px, 3px;
   -fx-text-fill: derive(#1d1d1d, 20.0%);
 }
 
@@ -33,7 +33,7 @@
   -fx-text-fill: #ffffff;
 }
 
-.cellPane {
+.cell-pane {
   -fx-background-color: derive(#1d1d1d, 20.0%);
 }
 

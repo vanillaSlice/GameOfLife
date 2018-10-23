@@ -8,7 +8,25 @@ package lowe.mike.gameoflife.model;
  */
 public enum Speed {
 
-  SLOW(800), MEDIUM(200), FAST(80), FASTEST(10);
+  /**
+   * Slow - 800 milliseconds between generations.
+   */
+  SLOW(800),
+
+  /**
+   * Medium - 200 milliseconds between generations.
+   */
+  MEDIUM(200),
+
+  /**
+   * Fast - 80 milliseconds between generations.
+   */
+  FAST(80),
+
+  /**
+   * Fastest - 10 milliseconds between generations.
+   */
+  FASTEST(10);
 
   private final double milliseconds;
 

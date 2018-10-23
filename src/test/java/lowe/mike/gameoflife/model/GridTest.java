@@ -2,8 +2,10 @@ package lowe.mike.gameoflife.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import org.junit.jupiter.api.BeforeEach;
+import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -16,28 +18,21 @@ public class GridTest {
   private static final int NUMBER_OF_ROWS = 5;
   private static final int NUMBER_OF_COLUMNS = 5;
 
-  private Grid grid;
-  private boolean[][] expectedAlive;
+  private final Grid grid = new Grid(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS);
+  private final boolean[][] expectedAlive = new boolean[NUMBER_OF_ROWS][NUMBER_OF_COLUMNS];
 
-  /**
-   * Test setup.
-   */
-  @BeforeEach
-  public void setUp() {
-    grid = new Grid(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS);
-    expectedAlive = new boolean[NUMBER_OF_ROWS][NUMBER_OF_COLUMNS];
+  @Test
+  public void constructor_negativeNumberOfRows_throwsIllegalArgumentException() {
+    assertThrows(IllegalArgumentException.class,
+        () -> new Grid(-1, NUMBER_OF_COLUMNS),
+        "number of rows is -1");
   }
 
   @Test
-  public void constructor_negativeNumberOfRows_throwsNegativeArraySizeException() {
-    assertThrows(NegativeArraySizeException.class,
-        () -> new Grid(-1, NUMBER_OF_COLUMNS));
-  }
-
-  @Test
-  public void constructor_negativeNumberOfColumns_throwsNegativeArraySizeException() {
-    assertThrows(NegativeArraySizeException.class,
-        () -> new Grid(NUMBER_OF_ROWS, -1));
+  public void constructor_negativeNumberOfColumns_throwsIllegalArgumentException() {
+    assertThrows(IllegalArgumentException.class,
+        () -> new Grid(NUMBER_OF_ROWS, -1),
+        "number of columns is -1");
   }
 
   @Test
@@ -157,6 +152,25 @@ public class GridTest {
 
     // verification
     expectedAlive[0][0] = false;
+    verifyGrid();
+  }
+
+  @Test
+  public void randomGeneration_randomlySetsCellsAsAliveOrDead() {
+    // setup
+    Random random = mock(Random.class);
+    when(random.nextBoolean())
+        .thenReturn(true)
+        .thenReturn(false)
+        .thenReturn(true)
+        .thenReturn(false);
+
+    // execution
+    grid.randomGeneration(random);
+
+    // verification
+    expectedAlive[0][0] = true;
+    expectedAlive[0][2] = true;
     verifyGrid();
   }
 

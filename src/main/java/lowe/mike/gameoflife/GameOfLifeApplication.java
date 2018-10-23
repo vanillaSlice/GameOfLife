@@ -12,6 +12,7 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import lowe.mike.gameoflife.controller.Controller;
 import lowe.mike.gameoflife.model.GameOfLife;
+import lowe.mike.gameoflife.model.Grid;
 
 /**
  * Entry point for <i>The Game of Life</i> application.
@@ -23,7 +24,7 @@ public class GameOfLifeApplication extends Application {
   private static final String APP_NAME = "Game of Life";
   private static final int NUMBER_OF_ROWS = 40;
   private static final int NUMBER_OF_COLUMNS = 70;
-  private static final String VIEW_RESOURCE_PATH = "/view/View.fxml";
+  private static final String VIEW_RESOURCE_PATH = "/view/view.fxml";
   private static final Image ICON_64X64 = new Image("/view/icon-64x64.png");
   private static final Image ICON_32X32 = new Image("/view/icon-32x32.png");
   private static final Image ICON_16X16 = new Image("/view/icon-16x16.png");
@@ -32,17 +33,20 @@ public class GameOfLifeApplication extends Application {
   private Stage primaryStage;
   private Parent view;
 
+  public GameOfLifeApplication() {
+    this(new GameOfLife(new Grid(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS)));
+  }
+
+  public GameOfLifeApplication(GameOfLife gameOfLife) {
+    this.gameOfLife = gameOfLife;
+  }
+
   @Override
   public void start(Stage primaryStage) {
-    initializeGameOfLife();
     initializePrimaryStage(primaryStage);
     initializeView();
     addIcons();
     showScene();
-  }
-
-  private void initializeGameOfLife() {
-    gameOfLife = new GameOfLife(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS);
   }
 
   private void initializePrimaryStage(Stage primaryStage) {
