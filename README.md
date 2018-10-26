@@ -72,7 +72,7 @@ For those of you that are interested, the technology used in this project includ
 
 * Java 8
 * JavaFX (for the GUI)
-* JUnit, Mockito and TestFx (for testing)
+* JUnit, Mockito and TestFX (for testing)
 * Gradle (for building and dependency management)
 
 ## Useful Links
