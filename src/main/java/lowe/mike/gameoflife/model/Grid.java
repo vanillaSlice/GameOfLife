@@ -1,6 +1,6 @@
 package lowe.mike.gameoflife.model;
 
-import static lowe.mike.gameoflife.model.Util.requirePositiveNumber;
+import static lowe.mike.gameoflife.model.Utils.requirePositiveNumber;
 
 import java.util.Arrays;
 import java.util.List;

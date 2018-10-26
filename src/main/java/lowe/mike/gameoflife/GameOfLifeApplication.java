@@ -1,5 +1,6 @@
 package lowe.mike.gameoflife;
 
+import static java.util.Objects.requireNonNull;
 import static javafx.application.Platform.exit;
 
 import java.io.IOException;
@@ -33,17 +34,29 @@ public class GameOfLifeApplication extends Application {
   private Stage primaryStage;
   private Parent view;
 
+  /**
+   * Creates a new {@code GameOfLifeApplication} instance.
+   */
+  public GameOfLifeApplication() {
+    this(new GameOfLife(new Grid(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS)));
+  }
+
+  /**
+   * Creates a new {@code GameOfLifeApplication} instance given a {@link GameOfLife} instance.
+   *
+   * @param gameOfLife the {@link GameOfLife} instance
+   * @throws NullPointerException if {@code gameOfLife} is {@code null}
+   */
+  public GameOfLifeApplication(GameOfLife gameOfLife) {
+    this.gameOfLife = requireNonNull(gameOfLife, "game of life cannot be null");
+  }
+
   @Override
   public void start(Stage primaryStage) {
-    initializeGameOfLife();
     initializePrimaryStage(primaryStage);
     initializeView();
     addIcons();
     showScene();
-  }
-
-  private void initializeGameOfLife() {
-    gameOfLife = new GameOfLife(new Grid(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS));
   }
 
   private void initializePrimaryStage(Stage primaryStage) {
