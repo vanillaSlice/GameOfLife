@@ -1,8 +1,10 @@
 package lowe.mike.gameoflife.model;
 
-import java.util.ArrayList;
+import static lowe.mike.gameoflife.model.Util.requirePositiveNumber;
+
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
+import java.util.Random;
 
 /**
  * {@code Grid} instances represent the grid in <i>The Game of Life</i>.
@@ -16,63 +18,28 @@ public class Grid {
   private final Cell[][] cells;
 
   /**
-   * Creates a new {@code Grid} instance given the number of rows and columns to add.
+   * Creates a new {@code Grid} instance given the number of rows and columns.
    *
    * @param numberOfRows the number of rows
    * @param numberOfColumns the number of columns
-   * @throws NegativeArraySizeException if {@code numberOfRows} or {@code numberOfColumns} are
-   *     less than 0
+   * @throws IllegalArgumentException if {@code numberOfRows} or {@code numberOfColumns} are
+   *     less than or equal to 0
    */
   public Grid(int numberOfRows, int numberOfColumns) {
-    this.numberOfRows = numberOfRows;
-    this.numberOfColumns = numberOfColumns;
-    this.cells = new Cell[this.numberOfRows][this.numberOfColumns];
-    initializeCells();
+    this.numberOfRows = requirePositiveNumber(numberOfRows, "number of rows is " + numberOfRows);
+    this.numberOfColumns =
+        requirePositiveNumber(numberOfColumns, "number of columns is " + numberOfColumns);
+    this.cells = createCells();
   }
 
-  private void initializeCells() {
-    createNewCells();
-    setCellNeighbours();
-  }
-
-  private void createNewCells() {
+  private Cell[][] createCells() {
+    Cell[][] cells = new Cell[getNumberOfRows()][getNumberOfColumns()];
     for (int rowIndex = 0; rowIndex < getNumberOfRows(); rowIndex++) {
       for (int columnIndex = 0; columnIndex < getNumberOfColumns(); columnIndex++) {
         cells[rowIndex][columnIndex] = new Cell();
       }
     }
-  }
-
-  private void setCellNeighbours() {
-    for (int rowIndex = 0; rowIndex < getNumberOfRows(); rowIndex++) {
-      for (int columnIndex = 0; columnIndex < getNumberOfColumns(); columnIndex++) {
-        Cell[] neighbours = getNeighbours(rowIndex, columnIndex);
-        Cell cell = getCell(rowIndex, columnIndex);
-        cell.setNeighbours(neighbours);
-      }
-    }
-  }
-
-  private Cell[] getNeighbours(int rowIndex, int columnIndex) {
-    List<Cell> neighbours = new ArrayList<>();
-
-    int north = rowIndex - 1;
-    int east = columnIndex + 1;
-    int south = rowIndex + 1;
-    int west = columnIndex - 1;
-
-    neighbours.add(getCell(north, west));
-    neighbours.add(getCell(north, columnIndex));
-    neighbours.add(getCell(north, east));
-    neighbours.add(getCell(rowIndex, east));
-    neighbours.add(getCell(south, east));
-    neighbours.add(getCell(south, columnIndex));
-    neighbours.add(getCell(south, west));
-    neighbours.add(getCell(rowIndex, west));
-
-    neighbours.removeIf(Objects::isNull);
-
-    return neighbours.toArray(new Cell[0]);
+    return cells;
   }
 
   /**
@@ -116,24 +83,67 @@ public class Grid {
 
   /**
    * Transitions all {@link Cell}s in this {@code Grid} to the next generation.
+   *
+   * <p>The following rules are applied:
+   * <ul>
+   * <li>Any live {@link Cell} with fewer than two live neighbours dies, i.e. under
+   * population.</li>
+   * <li>Any live {@link Cell} with two or three live neighbours lives on to the next
+   * generation.</li>
+   * <li>Any live {@link Cell} with more than three live neighbours dies, i.e. overpopulation.</li>
+   * <li>Any dead {@link Cell} with exactly three live neighbours becomes a live cell, i.e.
+   * reproduction.</li>
+   * </ul>
    */
   public void nextGeneration() {
-    calculateCellsNextState();
-    transitionCellsToNextState();
+    goToNextState(calculateNextState());
   }
 
-  private void calculateCellsNextState() {
-    for (Cell[] row : cells) {
-      for (Cell cell : row) {
-        cell.calculateNextState();
+  private boolean[][] calculateNextState() {
+    boolean[][] nextState = new boolean[getNumberOfRows()][getNumberOfColumns()];
+
+    for (int rowIndex = 0; rowIndex < getNumberOfRows(); rowIndex++) {
+      for (int columnIndex = 0; columnIndex < getNumberOfColumns(); columnIndex++) {
+        Cell cell = getCell(rowIndex, columnIndex);
+        int numberOfAliveNeighbours = countAliveNeighbours(rowIndex, columnIndex);
+        boolean isAliveInNextState =
+            ((cell.isAlive() && numberOfAliveNeighbours == 2) || numberOfAliveNeighbours == 3);
+        nextState[rowIndex][columnIndex] = isAliveInNextState;
       }
     }
+
+    return nextState;
   }
 
-  private void transitionCellsToNextState() {
-    for (Cell[] row : cells) {
-      for (Cell cell : row) {
-        cell.goToNextState();
+  private int countAliveNeighbours(int rowIndex, int columnIndex) {
+    return (int) getNeighbours(rowIndex, columnIndex)
+        .stream()
+        .filter(Cell::isAlive)
+        .count();
+  }
+
+  private List<Cell> getNeighbours(int rowIndex, int columnIndex) {
+    int north = rowIndex - 1;
+    int east = columnIndex + 1;
+    int south = rowIndex + 1;
+    int west = columnIndex - 1;
+
+    return Arrays.asList(
+        getCell(north, west),
+        getCell(north, columnIndex),
+        getCell(north, east),
+        getCell(rowIndex, east),
+        getCell(south, east),
+        getCell(south, columnIndex),
+        getCell(south, west),
+        getCell(rowIndex, west)
+    );
+  }
+
+  private void goToNextState(boolean[][] nextState) {
+    for (int rowIndex = 0; rowIndex < getNumberOfRows(); rowIndex++) {
+      for (int columnIndex = 0; columnIndex < getNumberOfColumns(); columnIndex++) {
+        getCell(rowIndex, columnIndex).setAlive(nextState[rowIndex][columnIndex]);
       }
     }
   }
@@ -142,9 +152,20 @@ public class Grid {
    * Sets all {@link Cell}s in this {@code Grid} as dead.
    */
   public void clear() {
-    for (Cell[] row : cells) {
-      for (Cell cell : row) {
-        cell.setAlive(false);
+    for (int rowIndex = 0; rowIndex < getNumberOfRows(); rowIndex++) {
+      for (int columnIndex = 0; columnIndex < getNumberOfColumns(); columnIndex++) {
+        getCell(rowIndex, columnIndex).setAlive(false);
+      }
+    }
+  }
+
+  /**
+   * Goes through each {@link Cell} in this {@code Grid} and randomly sets it as alive or dead.
+   */
+  public void randomGeneration(Random random) {
+    for (int rowIndex = 0; rowIndex < getNumberOfRows(); rowIndex++) {
+      for (int columnIndex = 0; columnIndex < getNumberOfColumns(); columnIndex++) {
+        getCell(rowIndex, columnIndex).setAlive(random.nextBoolean());
       }
     }
   }

@@ -2,8 +2,11 @@ package lowe.mike.gameoflife.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -13,26 +16,14 @@ import org.junit.jupiter.api.Test;
  */
 public class GameOfLifeTest {
 
-  private GameOfLife gameOfLife;
-
-  /**
-   * Test setup.
-   */
-  @BeforeEach
-  public void setUp() {
-    gameOfLife = new GameOfLife(3, 3);
-  }
+  private final Grid grid = mock(Grid.class);
+  private final GameOfLife gameOfLife = new GameOfLife(grid);
 
   @Test
-  public void constructor_negativeNumberOfRows_throwsNegativeArraySizeException() {
-    assertThrows(NegativeArraySizeException.class,
-        () -> new GameOfLife(-1, 3));
-  }
-
-  @Test
-  public void constructor_negativeNumberOfColumns_throwsNegativeArraySizeException() {
-    assertThrows(NegativeArraySizeException.class,
-        () -> new GameOfLife(3, -1));
+  public void constructor_nullGrid_throwsNullPointerException() {
+    assertThrows(NullPointerException.class,
+        () -> new GameOfLife(null),
+        "grid is null");
   }
 
   @Test
@@ -44,6 +35,14 @@ public class GameOfLifeTest {
     assertEquals(2, gameOfLife.getGeneration());
     gameOfLife.next();
     assertEquals(3, gameOfLife.getGeneration());
+    verify(grid, times(3)).nextGeneration();
+  }
+
+  @Test
+  public void setSpeed_nullSpeed_throwsNullPointerException() {
+    assertThrows(NullPointerException.class,
+        () -> gameOfLife.setSpeed(null),
+        "speed is null");
   }
 
   @Test
@@ -56,6 +55,20 @@ public class GameOfLifeTest {
 
     // verification
     assertEquals(0, gameOfLife.getGeneration());
+    verify(grid).clear();
+  }
+
+  @Test
+  public void reset() {
+    // setup
+    gameOfLife.play();
+
+    // execution
+    gameOfLife.reset();
+
+    // verification
+    assertEquals(0, gameOfLife.getGeneration());
+    verify(grid, times(2)).randomGeneration(any());
   }
 
 }

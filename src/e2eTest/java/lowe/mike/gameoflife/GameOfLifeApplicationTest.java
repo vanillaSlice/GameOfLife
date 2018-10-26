@@ -144,7 +144,7 @@ public class GameOfLifeApplicationTest {
   public void cellClick_togglesAlive(FxRobot robot) {
     // initial setup
     Pane cellPane = robot
-        .lookup(".cellPane")
+        .lookup(".cell-pane")
         .lookup((Predicate<Pane>) p -> !p.getStyleClass().contains("alive"))
         .query();
 
