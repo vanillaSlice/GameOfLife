@@ -23,16 +23,16 @@ public class GridTest {
 
   @Test
   public void constructor_negativeNumberOfRows_throwsIllegalArgumentException() {
-    assertThrows(IllegalArgumentException.class,
-        () -> new Grid(-1, NUMBER_OF_COLUMNS),
-        "number of rows is -1");
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        () -> new Grid(-1, NUMBER_OF_COLUMNS));
+    assertEquals("number of rows is -1", exception.getMessage());
   }
 
   @Test
   public void constructor_negativeNumberOfColumns_throwsIllegalArgumentException() {
-    assertThrows(IllegalArgumentException.class,
-        () -> new Grid(NUMBER_OF_ROWS, -1),
-        "number of columns is -1");
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class,
+        () -> new Grid(NUMBER_OF_ROWS, -1));
+    assertEquals("number of columns is -1", exception.getMessage());
   }
 
   @Test
