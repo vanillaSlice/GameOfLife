@@ -113,7 +113,7 @@ public class GameOfLife {
    * @throws NullPointerException if {@code speed} is {@code null}
    */
   public void setSpeed(Speed speed) {
-    this.speed.set(requireNonNull(speed, "speed cannot be null"));
+    this.speed.set(requireNonNull(speed, "speed is null"));
   }
 
   /**
