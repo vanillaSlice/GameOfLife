@@ -1,4 +1,5 @@
 # Game of Life
+
 [![Latest Release](https://img.shields.io/github/release/vanillaSlice/GameOfLife.svg)](https://github.com/vanillaSlice/GameOfLife/releases/latest)
 [![Build Status](https://img.shields.io/travis/vanillaSlice/GameOfLife/master.svg)](https://travis-ci.org/vanillaSlice/GameOfLife)
 [![Coverage Status](https://img.shields.io/coveralls/github/vanillaSlice/GameOfLife/master.svg)](https://coveralls.io/github/vanillaSlice/GameOfLife?branch=master)
@@ -17,20 +18,23 @@ rules apply:
 
 An example of cell interaction:
 
-![pattern](/images/pattern-1.gif)
+![Cell Interaction](/images/pattern-1.gif)
 
 See [Wikipedia](https://en.wikipedia.org/wiki/Conway's_Game_of_Life) for more information on The Game of Life.
 
 ## Screenshot
-![screenshot](/images/screenshot-1.png)
+
+![Screenshot](/images/screenshot-1.png)
 
 ## Getting Started
 
 ### Prerequisites
+
 * Java 8
 * Gradle (optional)
 
 ### Building
+
 To build the project:
 
 1. Clone the project
@@ -54,6 +58,7 @@ To build the project:
     ```
 
 ### Running
+
 Once built, to run the application go to `build/libs` and double-click `GameOfLife-all-1.1.0.jar` or from your
 terminal/command prompt run:
 
@@ -62,14 +67,16 @@ java -jar GameOfLife-all-1.1.0.jar
 ```
 
 ## Technology Used
+
 For those of you that are interested, the technology used in this project includes:
 
 * Java 8
 * JavaFX (for the GUI)
-* JUnit (for unit testing)
+* JUnit, Mockito and TestFx (for testing)
 * Gradle (for building and dependency management)
 
 ## Useful Links
+
 Resources useful for the completion of this project:
 
 * [Game of Life on Wikipedia](https://en.wikipedia.org/wiki/Conway's_Game_of_Life)

@@ -34,6 +34,7 @@ public class GameOfLife {
    * Creates a new {@code GameOfLife} instance given the underlying {@link Grid}.
    *
    * @param grid the underlying {@link Grid}
+   * @throws NullPointerException if {@code grid} is {@code null}
    */
   public GameOfLife(Grid grid) {
     this.grid = requireNonNull(grid, "grid is null");

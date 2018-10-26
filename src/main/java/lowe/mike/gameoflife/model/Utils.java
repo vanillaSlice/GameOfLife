@@ -1,11 +1,16 @@
 package lowe.mike.gameoflife.model;
 
 /**
- * Contains useful helper methods.
+ * {@code Utils} contains useful helper methods.
+ *
+ * <p>Instances of {@code Utils} cannot be created.
  *
  * @author Mike Lowe
  */
-public class Util {
+public class Utils {
+
+  private Utils() {
+  }
 
   /**
    * Checks if a number is greater than 0, if not then an {@link IllegalArgumentException} is

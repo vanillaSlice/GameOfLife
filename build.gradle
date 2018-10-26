@@ -37,7 +37,7 @@ e2eTest {
 }
 
 checkstyle {
-    toolVersion = '8.13'
+    toolVersion = '8.14'
     ignoreFailures = false
     maxWarnings = 0
     maxErrors = 0
