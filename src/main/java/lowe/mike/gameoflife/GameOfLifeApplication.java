@@ -48,7 +48,7 @@ public class GameOfLifeApplication extends Application {
    * @throws NullPointerException if {@code gameOfLife} is {@code null}
    */
   public GameOfLifeApplication(GameOfLife gameOfLife) {
-    this.gameOfLife = requireNonNull(gameOfLife, "game of life cannot be null");
+    this.gameOfLife = requireNonNull(gameOfLife, "game of life is null");
   }
 
   @Override

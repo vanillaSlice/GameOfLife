@@ -21,9 +21,9 @@ public class GameOfLifeTest {
 
   @Test
   public void constructor_nullGrid_throwsNullPointerException() {
-    assertThrows(NullPointerException.class,
-        () -> new GameOfLife(null),
-        "grid is null");
+    NullPointerException exception = assertThrows(NullPointerException.class,
+        () -> new GameOfLife(null));
+    assertEquals("grid is null", exception.getMessage());
   }
 
   @Test
@@ -40,9 +40,9 @@ public class GameOfLifeTest {
 
   @Test
   public void setSpeed_nullSpeed_throwsNullPointerException() {
-    assertThrows(NullPointerException.class,
-        () -> gameOfLife.setSpeed(null),
-        "speed is null");
+    NullPointerException exception = assertThrows(NullPointerException.class,
+        () -> gameOfLife.setSpeed(null));
+    assertEquals("speed is null", exception.getMessage());
   }
 
   @Test
