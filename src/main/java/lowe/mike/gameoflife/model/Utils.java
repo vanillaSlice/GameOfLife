@@ -9,6 +9,7 @@ package lowe.mike.gameoflife.model;
  */
 public class Utils {
 
+  // don't want instances
   private Utils() {
   }
 
