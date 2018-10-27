@@ -18,15 +18,12 @@ import lowe.mike.gameoflife.model.GameOfLife;
 import lowe.mike.gameoflife.model.Grid;
 import lowe.mike.gameoflife.model.Speed;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
-import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.ApplicationTest;
 import org.testfx.util.WaitForAsyncUtils;
 
 /**
  * {@link GameOfLifeApplication} tests.
  */
-@ExtendWith(ApplicationExtension.class)
 public class GameOfLifeApplicationTest extends ApplicationTest {
 
   private GameOfLife gameOfLife;
