@@ -9,7 +9,6 @@ import static org.mockito.Mockito.verify;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
-import java.util.concurrent.TimeUnit;
 import java.util.function.Predicate;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
@@ -19,7 +18,6 @@ import lowe.mike.gameoflife.model.Grid;
 import lowe.mike.gameoflife.model.Speed;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
-import org.testfx.util.WaitForAsyncUtils;
 
 /**
  * {@link GameOfLifeApplication} tests.
@@ -43,7 +41,7 @@ public class GameOfLifeApplicationTest extends ApplicationTest {
     clickOn("#playToggleButton");
 
     // verification
-    WaitForAsyncUtils.sleep(2, TimeUnit.SECONDS);
+    sleep(2000);
     verifyThat("#generationNumberLabel", hasText(not("0")));
     verify(gameOfLife).play();
   }
@@ -52,14 +50,14 @@ public class GameOfLifeApplicationTest extends ApplicationTest {
   public void pauseButtonClick_pausesGameOfLife() {
     // initial setup
     clickOn("#playToggleButton");
-    WaitForAsyncUtils.sleep(2, TimeUnit.SECONDS);
+    sleep(2000);
 
     // execution
     clickOn("#pauseToggleButton");
 
     // verification
     String generationBefore = lookup("#generationNumberLabel").queryLabeled().getText();
-    WaitForAsyncUtils.sleep(2, TimeUnit.SECONDS);
+    sleep(2000);
     String generationAfter = lookup("#generationNumberLabel").queryLabeled().getText();
     assertEquals(generationBefore, generationAfter);
     verify(gameOfLife).pause();
@@ -69,7 +67,7 @@ public class GameOfLifeApplicationTest extends ApplicationTest {
   public void resetButtonClick_resetsGameOfLife() {
     // initial setup
     clickOn("#playToggleButton");
-    WaitForAsyncUtils.sleep(2, TimeUnit.SECONDS);
+    sleep(2000);
 
     // execution
     clickOn("#resetButton");
@@ -83,7 +81,7 @@ public class GameOfLifeApplicationTest extends ApplicationTest {
   public void clearButtonClick_clearsGameOfLife() {
     // initial setup
     clickOn("#playToggleButton");
-    WaitForAsyncUtils.sleep(2, TimeUnit.SECONDS);
+    sleep(2000);
 
     // execution
     clickOn("#clearButton");

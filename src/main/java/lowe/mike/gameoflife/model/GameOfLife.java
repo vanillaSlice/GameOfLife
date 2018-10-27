@@ -1,11 +1,10 @@
 package lowe.mike.gameoflife.model;
 
 import static java.util.Objects.requireNonNull;
-import static javafx.animation.Animation.INDEFINITE;
-import static javafx.animation.Animation.Status.RUNNING;
-import static lowe.mike.gameoflife.model.Speed.SLOW;
 
 import java.util.Random;
+import javafx.animation.Animation;
+import javafx.animation.Animation.Status;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.ObjectProperty;
@@ -28,7 +27,7 @@ public class GameOfLife {
   private final Grid grid;
   private final ReadOnlyLongWrapper generation = new ReadOnlyLongWrapper();
   private Timeline timeline;
-  private final ObjectProperty<Speed> speed = new SimpleObjectProperty<>(SLOW);
+  private final ObjectProperty<Speed> speed = new SimpleObjectProperty<>(Speed.SLOW);
 
   /**
    * Creates a new {@code GameOfLife} instance given the underlying {@link Grid}.
@@ -48,7 +47,7 @@ public class GameOfLife {
     EventHandler<ActionEvent> eventHandler = event -> next();
     KeyFrame keyFrame = new KeyFrame(duration, eventHandler);
     timeline = new Timeline(keyFrame);
-    timeline.setCycleCount(INDEFINITE);
+    timeline.setCycleCount(Animation.INDEFINITE);
   }
 
   /**
@@ -61,7 +60,7 @@ public class GameOfLife {
 
   private void addSpeedPropertyListener() {
     speed.addListener((observable, oldValue, newValue) -> {
-      boolean shouldPlay = timeline.getStatus() == RUNNING;
+      boolean shouldPlay = timeline.getStatus() == Status.RUNNING;
       pause();
       updateTimeline();
       if (shouldPlay) {

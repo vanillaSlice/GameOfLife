@@ -1,11 +1,11 @@
 package lowe.mike.gameoflife;
 
 import static java.util.Objects.requireNonNull;
-import static javafx.application.Platform.exit;
 
 import java.io.IOException;
 import java.net.URL;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -62,7 +62,7 @@ public class GameOfLifeApplication extends Application {
   private void initializePrimaryStage(Stage primaryStage) {
     this.primaryStage = primaryStage;
     this.primaryStage.setTitle(APP_NAME);
-    this.primaryStage.setOnCloseRequest(event -> exit());
+    this.primaryStage.setOnCloseRequest(event -> Platform.exit());
     this.primaryStage.setResizable(false);
     this.primaryStage.sizeToScene();
   }
