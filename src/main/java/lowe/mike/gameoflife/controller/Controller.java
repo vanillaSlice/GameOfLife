@@ -1,13 +1,6 @@
 package lowe.mike.gameoflife.controller;
 
 import static java.util.Objects.requireNonNull;
-import static javafx.scene.input.MouseEvent.MOUSE_CLICKED;
-import static javafx.scene.layout.GridPane.setFillHeight;
-import static javafx.scene.layout.GridPane.setFillWidth;
-import static lowe.mike.gameoflife.model.Speed.FAST;
-import static lowe.mike.gameoflife.model.Speed.FASTEST;
-import static lowe.mike.gameoflife.model.Speed.MEDIUM;
-import static lowe.mike.gameoflife.model.Speed.SLOW;
 
 import javafx.beans.property.BooleanProperty;
 import javafx.collections.ObservableList;
@@ -15,12 +8,14 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import lowe.mike.gameoflife.model.Cell;
 import lowe.mike.gameoflife.model.GameOfLife;
 import lowe.mike.gameoflife.model.Grid;
+import lowe.mike.gameoflife.model.Speed;
 
 /**
  * Controller for <i>The Game of Life</i> application.
@@ -114,8 +109,8 @@ public class Controller {
 
   private void addCellPaneStyle(Pane cellPane) {
     cellPane.setPrefSize(CELL_SIZE, CELL_SIZE);
-    setFillHeight(cellPane, true);
-    setFillWidth(cellPane, true);
+    GridPane.setFillHeight(cellPane, true);
+    GridPane.setFillWidth(cellPane, true);
     cellPane.getStyleClass().add(CELL_PANE_STYLE_CLASS);
   }
 
@@ -137,7 +132,7 @@ public class Controller {
 
   private void addClickEventHandler(int rowIndex, int columnIndex, Pane cellPane) {
     Cell cell = gameOfLife.getGrid().getCell(rowIndex, columnIndex);
-    cellPane.addEventHandler(MOUSE_CLICKED, event -> cell.toggleAlive());
+    cellPane.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> cell.toggleAlive());
   }
 
   @FXML
@@ -164,22 +159,22 @@ public class Controller {
 
   @FXML
   private void slowToggleButtonAction() {
-    gameOfLife.setSpeed(SLOW);
+    gameOfLife.setSpeed(Speed.SLOW);
   }
 
   @FXML
   private void mediumToggleButtonAction() {
-    gameOfLife.setSpeed(MEDIUM);
+    gameOfLife.setSpeed(Speed.MEDIUM);
   }
 
   @FXML
   private void fastToggleButtonAction() {
-    gameOfLife.setSpeed(FAST);
+    gameOfLife.setSpeed(Speed.FAST);
   }
 
   @FXML
   private void fastestToggleButtonAction() {
-    gameOfLife.setSpeed(FASTEST);
+    gameOfLife.setSpeed(Speed.FASTEST);
   }
 
 }
