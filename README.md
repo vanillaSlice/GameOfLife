@@ -30,15 +30,18 @@ See [Wikipedia](https://en.wikipedia.org/wiki/Conway's_Game_of_Life) for more in
 
 ### Prerequisites
 
-* Java 8
-* Gradle (optional)
+* [Java 8](https://www.oracle.com/technetwork/java/javase/overview/java8-2100321.html)
+* [Gradle](https://gradle.org) (optional)
 
 ### Building
 
-To build the project:
+*If you don't want to build the project yourself, head to
+[releases](https://github.com/vanillaSlice/GameOfLife/releases) and download one of the jar files from there.*
 
-1. Clone the project
-2. Navigate to the project directory in your terminal/command prompt
+To build the project yourself:
+
+1. Clone the project.
+2. Navigate to the project directory in your terminal/command prompt.
 3. If you have Gradle installed locally, run the Gradle Daemon:
 
     ```
@@ -56,11 +59,12 @@ To build the project:
     ```
     gradlew clean buildFatJar
     ```
+    
+    This will create a jar file called `GameOfLife-all-1.1.0.jar` in `build/libs`.
 
 ### Running
 
-Once built, to run the application go to `build/libs` and double-click `GameOfLife-all-1.1.0.jar` or from your
-terminal/command prompt run:
+To run the application double-click `GameOfLife-all-1.1.0.jar` or from your terminal/command prompt run:
 
 ```
 java -jar GameOfLife-all-1.1.0.jar
@@ -70,19 +74,18 @@ java -jar GameOfLife-all-1.1.0.jar
 
 For those of you that are interested, the technology used in this project includes:
 
-* Java 8
-* JavaFX (for the GUI)
-* JUnit, Mockito and TestFX (for testing)
-* Gradle (for building and dependency management)
+* [Java 8](https://www.oracle.com/technetwork/java/javase/overview/java8-2100321.html)
+* [JavaFX](https://docs.oracle.com/javase/8/javase-clienttechnologies.htm) (for the GUI)
+* [JUnit 5](https://junit.org/junit5/), [Mockito](https://site.mockito.org/) and
+  [TestFX](https://github.com/TestFX/TestFX) (for testing)
+* [Gradle](https://gradle.org) (for building and dependency management)
 
 ## Useful Links
 
 Resources useful for the completion of this project:
 
 * [The Game of Life on Wikipedia](https://en.wikipedia.org/wiki/Conway's_Game_of_Life)
-* [JavaFX](http://docs.oracle.com/javase/8/javase-clienttechnologies.htm)
-* [Gradle](https://gradle.org)
-* [Silkscreen](http://www.kottke.org/plus/type/silkscreen/index.html) - the font used in the GUI
+* [Silkscreen](https://www.kottke.org/plus/type/silkscreen/index.html) (the font used in the GUI)
 
 ## License
 
