@@ -37,7 +37,7 @@ public enum Speed {
   /**
    * Returns the amount of time between each generation in milliseconds.
    *
-   * @return the amount of time between each generation in milliseconds.
+   * @return the amount of time between each generation in milliseconds
    */
   public double getMilliseconds() {
     return milliseconds;

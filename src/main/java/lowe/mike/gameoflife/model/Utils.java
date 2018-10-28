@@ -20,7 +20,7 @@ public class Utils {
    * @param number the number to check
    * @param message detail message to be used in the event that an {@link
    *     IllegalArgumentException} is thrown
-   * @returns {@code number}
+   * @return {@code number}
    */
   public static int requirePositiveNumber(int number, String message) {
     if (number <= 0) {
