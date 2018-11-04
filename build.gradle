@@ -27,14 +27,12 @@ testSets {
     e2eTest
 }
 
-test {
+tasks.withType(Test) {
     useJUnitPlatform()
-    dependsOn e2eTest
 }
 
-e2eTest {
-    useJUnitPlatform()
-}
+check.dependsOn e2eTest
+e2eTest.mustRunAfter test
 
 checkstyle {
     toolVersion = '8.14'
