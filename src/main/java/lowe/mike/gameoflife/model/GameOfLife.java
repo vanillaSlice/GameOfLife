@@ -43,7 +43,7 @@ public class GameOfLife {
   }
 
   private void updateTimeline() {
-    Duration duration = new Duration(getSpeed().getMilliseconds());
+    Duration duration = new Duration(speed.get().getMilliseconds());
     EventHandler<ActionEvent> eventHandler = event -> next();
     KeyFrame keyFrame = new KeyFrame(duration, eventHandler);
     timeline = new Timeline(keyFrame);
@@ -53,7 +53,7 @@ public class GameOfLife {
   /**
    * Transitions into the next generation.
    */
-  public void next() {
+  void next() {
     grid.nextGeneration();
     generation.set(getGeneration() + 1);
   }
@@ -74,7 +74,7 @@ public class GameOfLife {
    *
    * @return the current generation
    */
-  public long getGeneration() {
+  long getGeneration() {
     return generation.get();
   }
 
@@ -94,15 +94,6 @@ public class GameOfLife {
    */
   public Grid getGrid() {
     return grid;
-  }
-
-  /**
-   * Returns the {@link Speed} of the game.
-   *
-   * @return the {@link Speed} of the game
-   */
-  public Speed getSpeed() {
-    return speed.get();
   }
 
   /**

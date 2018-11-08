@@ -26,7 +26,7 @@ public class Cell {
    *
    * @param isAlive {@code true} if this {@code Cell} is alive; {@code false} if it is dead
    */
-  public void setAlive(boolean isAlive) {
+  void setAlive(boolean isAlive) {
     aliveProperty().set(isAlive);
   }
 

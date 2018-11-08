@@ -1,14 +1,18 @@
 package lowe.mike.gameoflife;
 
+import static lowe.mike.gameoflife.GameOfLifeApplication.NUMBER_OF_COLUMNS;
+import static lowe.mike.gameoflife.GameOfLifeApplication.NUMBER_OF_ROWS;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.verify;
 import static org.testfx.api.FxAssert.verifyThat;
 import static org.testfx.matcher.control.LabeledMatchers.hasText;
 
+import java.io.IOException;
 import java.util.function.Predicate;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
@@ -27,8 +31,8 @@ public class GameOfLifeApplicationTest extends ApplicationTest {
   private GameOfLife gameOfLife;
 
   @Override
-  public void start(Stage stage) {
-    gameOfLife = spy(new GameOfLife(new Grid(40, 70)));
+  public void start(Stage stage) throws IOException {
+    gameOfLife = spy(new GameOfLife(new Grid(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS)));
     new GameOfLifeApplication(gameOfLife).start(stage);
   }
 
@@ -93,12 +97,21 @@ public class GameOfLifeApplicationTest extends ApplicationTest {
 
   @Test
   public void slowButtonClick_togglesSlow() {
-    // initial setup
-    ToggleButton mediumButton = lookup("#mediumToggleButton").query();
-    clickOn(mediumButton);
+    // setup
     ToggleButton slowButton = lookup("#slowToggleButton").query();
 
     // execution
+    clickOn(slowButton);
+
+    // verification (speed should default to slow)
+    assertTrue(slowButton.isSelected());
+    verify(gameOfLife, never()).setSpeed(Speed.SLOW);
+
+    // setup
+    ToggleButton mediumButton = lookup("#mediumToggleButton").query();
+
+    // execution
+    clickOn(mediumButton);
     clickOn(slowButton);
 
     // verification
