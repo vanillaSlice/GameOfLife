@@ -4,6 +4,8 @@ import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
@@ -22,15 +24,15 @@ import lowe.mike.gameoflife.model.Grid;
  */
 public class GameOfLifeApplication extends Application {
 
+  static final int NUMBER_OF_ROWS = 40;
+  static final int NUMBER_OF_COLUMNS = 70;
   private static final String APP_NAME = "Game of Life";
-  private static final int NUMBER_OF_ROWS = 40;
-  private static final int NUMBER_OF_COLUMNS = 70;
   private static final String VIEW_RESOURCE_PATH = "/view/view.fxml";
-  private static final Image ICON_64X64 = new Image("/view/icon-64x64.png");
-  private static final Image ICON_32X32 = new Image("/view/icon-32x32.png");
-  private static final Image ICON_16X16 = new Image("/view/icon-16x16.png");
+  private static final List<String> ICON_PATHS = Arrays.asList("/view/icon-64x64.png",
+      "/view/icon-32x32.png",
+      "/view/icon-16x16.png");
 
-  private GameOfLife gameOfLife;
+  private final GameOfLife gameOfLife;
   private Stage primaryStage;
   private Parent view;
 
@@ -47,12 +49,12 @@ public class GameOfLifeApplication extends Application {
    * @param gameOfLife the {@link GameOfLife} instance
    * @throws NullPointerException if {@code gameOfLife} is {@code null}
    */
-  public GameOfLifeApplication(GameOfLife gameOfLife) {
+  GameOfLifeApplication(GameOfLife gameOfLife) {
     this.gameOfLife = requireNonNull(gameOfLife, "game of life is null");
   }
 
   @Override
-  public void start(Stage primaryStage) {
+  public void start(Stage primaryStage) throws IOException {
     initializePrimaryStage(primaryStage);
     initializeView();
     addIcons();
@@ -67,25 +69,17 @@ public class GameOfLifeApplication extends Application {
     this.primaryStage.sizeToScene();
   }
 
-  private void initializeView() {
+  private void initializeView() throws IOException {
     FXMLLoader loader = new FXMLLoader();
     URL location = GameOfLifeApplication.class.getResource(VIEW_RESOURCE_PATH);
     loader.setLocation(location);
-    view = loadFxml(loader);
+    view = loader.load();
     Controller controller = loader.getController();
     controller.setGameOfLife(gameOfLife);
   }
 
-  private static <T> T loadFxml(FXMLLoader loader) {
-    try {
-      return loader.load();
-    } catch (IOException e) {
-      throw new AssertionError("Must always be able to load FXML resource");
-    }
-  }
-
   private void addIcons() {
-    primaryStage.getIcons().addAll(ICON_64X64, ICON_32X32, ICON_16X16);
+    ICON_PATHS.forEach(path -> primaryStage.getIcons().add(new Image(path)));
   }
 
   private void showScene() {

@@ -1,7 +1,7 @@
 package lowe.mike.gameoflife.model;
 
 /**
- * The {@code Speed} enum is used to dictate amount of time between each generation in
+ * The {@code Speed} enum is used to dictate the amount of time between each generation in
  * <i>The Game of Life</i>.
  *
  * @author Mike Lowe

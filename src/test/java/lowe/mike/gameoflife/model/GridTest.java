@@ -156,6 +156,13 @@ public class GridTest {
   }
 
   @Test
+  public void randomGeneration_nullRandom_throwsNullPointerException() {
+    NullPointerException exception = assertThrows(NullPointerException.class,
+        () -> grid.randomGeneration(null));
+    assertEquals("random is null", exception.getMessage());
+  }
+
+  @Test
   public void randomGeneration_randomlySetsCellsAsAliveOrDead() {
     // setup
     Random random = mock(Random.class);

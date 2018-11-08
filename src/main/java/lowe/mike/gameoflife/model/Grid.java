@@ -1,5 +1,6 @@
 package lowe.mike.gameoflife.model;
 
+import static java.util.Objects.requireNonNull;
 import static lowe.mike.gameoflife.model.Utils.requirePositiveNumber;
 
 import java.util.Arrays;
@@ -95,7 +96,7 @@ public class Grid {
    * reproduction.</li>
    * </ul>
    */
-  public void nextGeneration() {
+  void nextGeneration() {
     goToNextState(calculateNextState());
   }
 
@@ -151,7 +152,7 @@ public class Grid {
   /**
    * Sets all {@link Cell}s in this {@code Grid} as dead.
    */
-  public void clear() {
+  void clear() {
     for (int rowIndex = 0; rowIndex < getNumberOfRows(); rowIndex++) {
       for (int columnIndex = 0; columnIndex < getNumberOfColumns(); columnIndex++) {
         getCell(rowIndex, columnIndex).setAlive(false);
@@ -161,8 +162,12 @@ public class Grid {
 
   /**
    * Goes through each {@link Cell} in this {@code Grid} and randomly sets it as alive or dead.
+   *
+   * @param random {@link Random} instance used to decide if each {@link Cell} is alive or dead
+   * @throws NullPointerException if {@code random} is {@code null}
    */
-  public void randomGeneration(Random random) {
+  void randomGeneration(Random random) {
+    requireNonNull(random, "random is null");
     for (int rowIndex = 0; rowIndex < getNumberOfRows(); rowIndex++) {
       for (int columnIndex = 0; columnIndex < getNumberOfColumns(); columnIndex++) {
         getCell(rowIndex, columnIndex).setAlive(random.nextBoolean());
