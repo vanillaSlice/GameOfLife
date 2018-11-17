@@ -26,11 +26,12 @@ public class GameOfLifeApplication extends Application {
 
   static final int NUMBER_OF_ROWS = 40;
   static final int NUMBER_OF_COLUMNS = 70;
+
   private static final String APP_NAME = "Game of Life";
   private static final String VIEW_RESOURCE_PATH = "/view/view.fxml";
-  private static final List<String> ICON_PATHS = Arrays.asList("/view/icon-64x64.png",
+  private static final List<String> ICON_PATHS = Arrays.asList("/view/icon-16x16.png",
       "/view/icon-32x32.png",
-      "/view/icon-16x16.png");
+      "/view/icon-64x64.png");
 
   private final GameOfLife gameOfLife;
   private Stage primaryStage;

@@ -1,7 +1,5 @@
 package lowe.mike.gameoflife;
 
-import static lowe.mike.gameoflife.GameOfLifeApplication.NUMBER_OF_COLUMNS;
-import static lowe.mike.gameoflife.GameOfLifeApplication.NUMBER_OF_ROWS;
 import static org.hamcrest.CoreMatchers.not;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -17,6 +15,7 @@ import java.util.function.Predicate;
 import javafx.scene.control.ToggleButton;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import lowe.mike.gameoflife.controller.Controller;
 import lowe.mike.gameoflife.model.GameOfLife;
 import lowe.mike.gameoflife.model.Grid;
 import lowe.mike.gameoflife.model.Speed;
@@ -25,6 +24,8 @@ import org.testfx.framework.junit5.ApplicationTest;
 
 /**
  * {@link GameOfLifeApplication} tests.
+ *
+ * @author Mike Lowe
  */
 public class GameOfLifeApplicationTest extends ApplicationTest {
 
@@ -32,7 +33,8 @@ public class GameOfLifeApplicationTest extends ApplicationTest {
 
   @Override
   public void start(Stage stage) throws IOException {
-    gameOfLife = spy(new GameOfLife(new Grid(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS)));
+    gameOfLife = spy(new GameOfLife(
+        new Grid(GameOfLifeApplication.NUMBER_OF_ROWS, GameOfLifeApplication.NUMBER_OF_COLUMNS)));
     new GameOfLifeApplication(gameOfLife).start(stage);
   }
 
@@ -161,21 +163,21 @@ public class GameOfLifeApplicationTest extends ApplicationTest {
   @Test
   public void cellClick_togglesAlive() {
     // initial setup
-    Pane cellPane = lookup(".cell-pane")
-        .lookup((Predicate<Pane>) p -> !p.getStyleClass().contains("alive"))
+    Pane cellPane = lookup("." + Controller.CELL_PANE_STYLE_CLASS)
+        .lookup((Predicate<Pane>) p -> !p.getStyleClass().contains(Controller.ALIVE_STYLE_CLASS))
         .query();
 
     // execution
     clickOn(cellPane);
 
     // verification
-    assertTrue(cellPane.getStyleClass().contains("alive"));
+    assertTrue(cellPane.getStyleClass().contains(Controller.ALIVE_STYLE_CLASS));
 
     // execution
     clickOn(cellPane);
 
     // verification
-    assertFalse(cellPane.getStyleClass().contains("alive"));
+    assertFalse(cellPane.getStyleClass().contains(Controller.ALIVE_STYLE_CLASS));
   }
 
 }
