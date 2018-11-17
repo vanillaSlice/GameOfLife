@@ -24,9 +24,10 @@ import lowe.mike.gameoflife.model.Speed;
  */
 public class Controller {
 
+  public static final String CELL_PANE_STYLE_CLASS = "cell-pane";
+  public static final String ALIVE_STYLE_CLASS = "alive";
+
   private static final double CELL_SIZE = 14;
-  private static final String CELL_PANE_STYLE_CLASS = "cell-pane";
-  private static final String ALIVE_STYLE_CLASS = "alive";
 
   @FXML
   private AnchorPane rootPane;

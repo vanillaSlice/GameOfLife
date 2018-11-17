@@ -87,8 +87,7 @@ public class Grid {
    *
    * <p>The following rules are applied:
    * <ul>
-   * <li>Any live {@link Cell} with fewer than two live neighbours dies, i.e. under
-   * population.</li>
+   * <li>Any live {@link Cell} with fewer than two live neighbours dies, i.e. underpopulation.</li>
    * <li>Any live {@link Cell} with two or three live neighbours lives on to the next
    * generation.</li>
    * <li>Any live {@link Cell} with more than three live neighbours dies, i.e. overpopulation.</li>
