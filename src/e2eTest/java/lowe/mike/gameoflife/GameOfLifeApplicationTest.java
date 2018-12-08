@@ -19,6 +19,7 @@ import lowe.mike.gameoflife.controller.Controller;
 import lowe.mike.gameoflife.model.GameOfLife;
 import lowe.mike.gameoflife.model.Grid;
 import lowe.mike.gameoflife.model.Speed;
+import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
@@ -30,6 +31,18 @@ import org.testfx.framework.junit5.ApplicationTest;
 public class GameOfLifeApplicationTest extends ApplicationTest {
 
   private GameOfLife gameOfLife;
+
+  /**
+   * Headless testing set up.
+   */
+  @BeforeAll
+  public static void headlessSetUp() {
+    System.setProperty("java.awt.headless", "true");
+    System.setProperty("testfx.headless", "true");
+    System.setProperty("testfx.robot", "glass");
+    System.setProperty("prism.order", "sw");
+    System.setProperty("prism.text", "t2k");
+  }
 
   @Override
   public void start(Stage stage) throws IOException {
