@@ -28,7 +28,7 @@ import org.testfx.framework.junit5.ApplicationTest;
  *
  * @author Mike Lowe
  */
-public class GameOfLifeApplicationTest extends ApplicationTest {
+public class GameOfLifeApplicationE2ETest extends ApplicationTest {
 
   private GameOfLife gameOfLife;
 
