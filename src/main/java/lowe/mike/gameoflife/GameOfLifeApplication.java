@@ -57,15 +57,15 @@ public class GameOfLifeApplication extends Application {
 
   @Override
   public void start(Stage primaryStage) throws IOException {
-    initialisePrimaryStage(primaryStage);
-    initialiseFxmlLoader();
-    initialiseView();
-    initialiseController();
+    initializePrimaryStage(primaryStage);
+    initializeFxmlLoader();
+    initializeView();
+    initializeController();
     addIcons();
     showScene();
   }
 
-  private void initialisePrimaryStage(Stage primaryStage) {
+  private void initializePrimaryStage(Stage primaryStage) {
     this.primaryStage = primaryStage;
     this.primaryStage.setTitle(APP_NAME);
     this.primaryStage.setOnCloseRequest(event -> Platform.exit());
@@ -73,16 +73,16 @@ public class GameOfLifeApplication extends Application {
     this.primaryStage.sizeToScene();
   }
 
-  private void initialiseFxmlLoader() {
+  private void initializeFxmlLoader() {
     fxmlLoader = new FXMLLoader();
     fxmlLoader.setLocation(GameOfLifeApplication.class.getResource(VIEW_RESOURCE_PATH));
   }
 
-  private void initialiseView() throws IOException {
+  private void initializeView() throws IOException {
     view = fxmlLoader.load();
   }
 
-  private void initialiseController() {
+  private void initializeController() {
     Controller controller = fxmlLoader.getController();
     controller.setGameOfLife(gameOfLife);
   }
