@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'idea'
-    id 'org.unbroken-dome.test-sets' version '1.5.2'
+    id 'org.unbroken-dome.test-sets' version '2.0.3'
     id 'checkstyle'
     id 'jacoco'
     id 'com.github.kt3k.coveralls' version '2.8.2'
@@ -36,7 +36,7 @@ check.dependsOn e2eTest
 e2eTest.mustRunAfter test
 
 checkstyle {
-    toolVersion = '8.15'
+    toolVersion = '8.16'
     maxWarnings = 0
 }
 
@@ -71,7 +71,11 @@ task buildFatJar(type: Jar) {
                 'Main-Class': 'lowe.mike.gameoflife.GameOfLifeApplication'
     }
     baseName = 'GameOfLife-all'
-    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    from {
+        configurations.compile.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
     with jar
 }
 
