@@ -12,12 +12,12 @@ import javafx.scene.input.MouseEvent;
  *
  * @author Mike Lowe
  */
-class PersistentToggleGroup extends ToggleGroup {
+public class PersistentToggleGroup extends ToggleGroup {
 
   /**
    * Creates a new {@code PersistentToggleGroup}.
    */
-  PersistentToggleGroup() {
+  public PersistentToggleGroup() {
     getToggles().addListener((Change<? extends Toggle> change) -> {
       while (change.next()) {
         for (Toggle toggle : change.getAddedSubList()) {
@@ -31,5 +31,4 @@ class PersistentToggleGroup extends ToggleGroup {
       }
     });
   }
-
 }

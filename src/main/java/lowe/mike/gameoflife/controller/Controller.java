@@ -177,5 +177,4 @@ public class Controller {
   private void fastestToggleButtonAction() {
     gameOfLife.setSpeed(Speed.FASTEST);
   }
-
 }

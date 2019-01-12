@@ -26,7 +26,7 @@ public class Cell {
    *
    * @param isAlive {@code true} if this {@code Cell} is alive; {@code false} if it is dead
    */
-  void setAlive(boolean isAlive) {
+  public void setAlive(boolean isAlive) {
     aliveProperty().set(isAlive);
   }
 
@@ -45,5 +45,4 @@ public class Cell {
   public BooleanProperty aliveProperty() {
     return aliveProperty;
   }
-
 }

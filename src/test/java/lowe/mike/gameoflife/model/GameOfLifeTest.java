@@ -10,7 +10,7 @@ import static org.mockito.Mockito.verify;
 import org.junit.jupiter.api.Test;
 
 /**
- * {@link GameOfLife} tests.
+ * {@link GameOfLife} unit tests.
  *
  * @author Mike Lowe
  */
@@ -70,5 +70,4 @@ public class GameOfLifeTest {
     assertEquals(0, gameOfLife.getGeneration());
     verify(grid, times(2)).randomGeneration(any());
   }
-
 }

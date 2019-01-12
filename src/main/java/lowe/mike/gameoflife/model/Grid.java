@@ -95,7 +95,7 @@ public class Grid {
    * reproduction.</li>
    * </ul>
    */
-  void nextGeneration() {
+  public void nextGeneration() {
     goToNextState(calculateNextState());
   }
 
@@ -151,7 +151,7 @@ public class Grid {
   /**
    * Sets all {@link Cell}s in this {@code Grid} as dead.
    */
-  void clear() {
+  public void clear() {
     for (int rowIndex = 0; rowIndex < getNumberOfRows(); rowIndex++) {
       for (int columnIndex = 0; columnIndex < getNumberOfColumns(); columnIndex++) {
         getCell(rowIndex, columnIndex).setAlive(false);
@@ -165,7 +165,7 @@ public class Grid {
    * @param random {@link Random} instance used to decide if each {@link Cell} is alive or dead
    * @throws NullPointerException if {@code random} is {@code null}
    */
-  void randomGeneration(Random random) {
+  public void randomGeneration(Random random) {
     requireNonNull(random, "random is null");
     for (int rowIndex = 0; rowIndex < getNumberOfRows(); rowIndex++) {
       for (int columnIndex = 0; columnIndex < getNumberOfColumns(); columnIndex++) {
@@ -173,5 +173,4 @@ public class Grid {
       }
     }
   }
-
 }
