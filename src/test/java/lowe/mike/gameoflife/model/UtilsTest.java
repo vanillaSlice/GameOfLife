@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 /**
- * {@link Utils} tests.
+ * {@link Utils} unit tests.
  *
  * @author Mike Lowe
  */
@@ -30,5 +30,4 @@ public class UtilsTest {
   public void requirePositiveNumber_withPositive_returnsNumber() {
     assertEquals(1, Utils.requirePositiveNumber(1, "number is 1"));
   }
-
 }

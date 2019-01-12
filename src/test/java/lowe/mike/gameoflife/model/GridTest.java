@@ -9,7 +9,7 @@ import java.util.Random;
 import org.junit.jupiter.api.Test;
 
 /**
- * {@link Grid} tests.
+ * {@link Grid} unit tests.
  *
  * @author Mike Lowe
  */
@@ -190,5 +190,4 @@ public class GridTest {
       }
     }
   }
-
 }

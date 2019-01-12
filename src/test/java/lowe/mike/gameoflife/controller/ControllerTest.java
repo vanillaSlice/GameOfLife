@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import org.junit.jupiter.api.Test;
 
 /**
- * {@link Controller} tests.
+ * {@link Controller} unit tests.
  *
  * @author Mike Lowe
  */
@@ -18,5 +18,4 @@ public class ControllerTest {
         () -> new Controller().setGameOfLife(null));
     assertEquals("game of life is null", exception.getMessage());
   }
-
 }

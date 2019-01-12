@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 /**
- * {@link Cell} tests.
+ * {@link Cell} unit tests.
  *
  * @author Mike Lowe
  */
@@ -24,5 +24,4 @@ public class CellTest {
     cell.toggleAlive();
     assertFalse(cell.isAlive());
   }
-
 }

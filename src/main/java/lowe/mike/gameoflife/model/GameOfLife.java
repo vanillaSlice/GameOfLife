@@ -53,7 +53,7 @@ public class GameOfLife {
   /**
    * Transitions into the next generation.
    */
-  void next() {
+  public void next() {
     grid.nextGeneration();
     generation.set(getGeneration() + 1);
   }
@@ -74,7 +74,7 @@ public class GameOfLife {
    *
    * @return the current generation
    */
-  long getGeneration() {
+  public long getGeneration() {
     return generation.get();
   }
 
@@ -136,5 +136,4 @@ public class GameOfLife {
     clear();
     grid.randomGeneration(RANDOM);
   }
-
 }

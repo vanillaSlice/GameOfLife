@@ -3,7 +3,6 @@ package lowe.mike.gameoflife;
 import static java.util.Objects.requireNonNull;
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.Arrays;
 import java.util.List;
 import javafx.application.Application;
@@ -24,16 +23,18 @@ import lowe.mike.gameoflife.model.Grid;
  */
 public class GameOfLifeApplication extends Application {
 
-  static final int NUMBER_OF_ROWS = 40;
-  static final int NUMBER_OF_COLUMNS = 70;
-
   private static final String APP_NAME = "Game of Life";
+  private static final int NUMBER_OF_ROWS = 40;
+  private static final int NUMBER_OF_COLUMNS = 70;
   private static final String VIEW_RESOURCE_PATH = "/view/view.fxml";
-  private static final List<String> ICON_PATHS = Arrays.asList("/view/icon-16x16.png",
+  private static final List<String> ICON_PATHS = Arrays.asList(
+      "/view/icon-16x16.png",
       "/view/icon-32x32.png",
-      "/view/icon-64x64.png");
+      "/view/icon-64x64.png"
+  );
 
   private final GameOfLife gameOfLife;
+  private FXMLLoader fxmlLoader;
   private Stage primaryStage;
   private Parent view;
 
@@ -50,19 +51,21 @@ public class GameOfLifeApplication extends Application {
    * @param gameOfLife the {@link GameOfLife} instance
    * @throws NullPointerException if {@code gameOfLife} is {@code null}
    */
-  GameOfLifeApplication(GameOfLife gameOfLife) {
+  public GameOfLifeApplication(GameOfLife gameOfLife) {
     this.gameOfLife = requireNonNull(gameOfLife, "game of life is null");
   }
 
   @Override
   public void start(Stage primaryStage) throws IOException {
-    initializePrimaryStage(primaryStage);
-    initializeView();
+    initialisePrimaryStage(primaryStage);
+    initialiseFxmlLoader();
+    initialiseView();
+    initialiseController();
     addIcons();
     showScene();
   }
 
-  private void initializePrimaryStage(Stage primaryStage) {
+  private void initialisePrimaryStage(Stage primaryStage) {
     this.primaryStage = primaryStage;
     this.primaryStage.setTitle(APP_NAME);
     this.primaryStage.setOnCloseRequest(event -> Platform.exit());
@@ -70,12 +73,17 @@ public class GameOfLifeApplication extends Application {
     this.primaryStage.sizeToScene();
   }
 
-  private void initializeView() throws IOException {
-    FXMLLoader loader = new FXMLLoader();
-    URL location = GameOfLifeApplication.class.getResource(VIEW_RESOURCE_PATH);
-    loader.setLocation(location);
-    view = loader.load();
-    Controller controller = loader.getController();
+  private void initialiseFxmlLoader() {
+    fxmlLoader = new FXMLLoader();
+    fxmlLoader.setLocation(GameOfLifeApplication.class.getResource(VIEW_RESOURCE_PATH));
+  }
+
+  private void initialiseView() throws IOException {
+    view = fxmlLoader.load();
+  }
+
+  private void initialiseController() {
+    Controller controller = fxmlLoader.getController();
     controller.setGameOfLife(gameOfLife);
   }
 
@@ -84,9 +92,7 @@ public class GameOfLifeApplication extends Application {
   }
 
   private void showScene() {
-    Scene scene = new Scene(view);
-    primaryStage.setScene(scene);
+    primaryStage.setScene(new Scene(view));
     primaryStage.show();
   }
-
 }

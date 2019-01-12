@@ -24,11 +24,14 @@ import org.junit.jupiter.api.Test;
 import org.testfx.framework.junit5.ApplicationTest;
 
 /**
- * {@link GameOfLifeApplication} tests.
+ * {@link GameOfLifeApplication} E2E tests.
  *
  * @author Mike Lowe
  */
-public class GameOfLifeApplicationE2ETest extends ApplicationTest {
+public class GameOfLifeApplicationE2eTest extends ApplicationTest {
+
+  private static final int NUMBER_OF_ROWS = 40;
+  private static final int NUMBER_OF_COLUMNS = 70;
 
   private GameOfLife gameOfLife;
 
@@ -46,9 +49,13 @@ public class GameOfLifeApplicationE2ETest extends ApplicationTest {
 
   @Override
   public void start(Stage stage) throws IOException {
-    gameOfLife = spy(new GameOfLife(
-        new Grid(GameOfLifeApplication.NUMBER_OF_ROWS, GameOfLifeApplication.NUMBER_OF_COLUMNS)));
+    gameOfLife = spy(new GameOfLife(new Grid(NUMBER_OF_ROWS, NUMBER_OF_COLUMNS)));
     new GameOfLifeApplication(gameOfLife).start(stage);
+  }
+
+  @Test
+  public void applicationBoots() {
+    new GameOfLifeApplication();
   }
 
   @Test
@@ -192,5 +199,4 @@ public class GameOfLifeApplicationE2ETest extends ApplicationTest {
     // verification
     assertFalse(cellPane.getStyleClass().contains(Controller.ALIVE_STYLE_CLASS));
   }
-
 }

@@ -7,7 +7,7 @@ package lowe.mike.gameoflife.model;
  *
  * @author Mike Lowe
  */
-class Utils {
+public class Utils {
 
   // don't want instances
   private Utils() {
@@ -22,11 +22,10 @@ class Utils {
    *     IllegalArgumentException} is thrown
    * @return {@code number}
    */
-  static int requirePositiveNumber(int number, String message) {
+  public static int requirePositiveNumber(int number, String message) {
     if (number <= 0) {
       throw new IllegalArgumentException(message);
     }
     return number;
   }
-
 }

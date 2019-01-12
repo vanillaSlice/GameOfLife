@@ -42,5 +42,4 @@ public enum Speed {
   public double getMilliseconds() {
     return milliseconds;
   }
-
 }
