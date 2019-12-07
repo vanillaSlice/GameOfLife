@@ -1,7 +1,7 @@
 # Game of Life
 
 [![Latest Release](https://img.shields.io/github/release/vanillaSlice/GameOfLife.svg)](https://github.com/vanillaSlice/GameOfLife/releases/latest)
-[![Build Status](https://img.shields.io/travis/vanillaSlice/GameOfLife/master.svg)](https://travis-ci.org/vanillaSlice/GameOfLife)
+[![Build Status](https://img.shields.io/travis/com/vanillaSlice/GameOfLife/master.svg)](https://travis-ci.com/vanillaSlice/GameOfLife)
 [![Coverage Status](https://img.shields.io/coveralls/github/vanillaSlice/GameOfLife/master.svg)](https://coveralls.io/github/vanillaSlice/GameOfLife?branch=master)
 [![License](https://img.shields.io/github/license/vanillaSlice/GameOfLife.svg)](LICENSE)
 
@@ -59,7 +59,7 @@ To build the project yourself:
     ```
     gradlew clean buildFatJar
     ```
-    
+
     This will create a jar file called `GameOfLife-all-1.1.0.jar` in `build/libs`.
 
 ### Running

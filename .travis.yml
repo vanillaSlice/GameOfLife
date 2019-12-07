@@ -4,6 +4,7 @@ branches:
     - master
 os:
   - linux
+dist: trusty
 sudo: false
 jdk:
   - oraclejdk8
